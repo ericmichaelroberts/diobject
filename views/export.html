@@ -1,0 +1,105 @@
+
+<div id="reporting-wrapper" class="dmsa-module-wrapper">
+	<div id="report-export-pane">
+		<div class="box-header">
+			<!-- #datasource-form BEGIN -->
+			<form class="box dmsa-dynaform" id="datasource-form" target="target-placeholder">
+				<div class="box-header accordion-heading">
+					<a class="accordion-toggle" href="#">
+						<span class="proper-title"></span>
+						<span class="default-title">Available Reports</span>
+					</a>
+				</div>
+				<div class="box-content padded accordion-body in" id="step-1-body">
+					<div class="col-to-row-tablet two-to-one report-selector-wrapper">
+						<div id="report-info-pane">
+							<h3 class="report-title">Select a Report</h3>
+							<div class="report-description">
+								<h4 class="report-heading"></h4>
+								<ul class="report-keywords" data-label="keywords"></ul>
+								<ul class="report-metrics" data-label="metrics"></ul>
+							</div>
+							<ul class="report-requires" data-label="requires"></ul>
+						</div>
+						<div id="report-selector-pane">
+							<div class="input-wrapper hidden-input">
+								<input type="hidden" value="0" name="has_access">
+							</div>
+							<div class="flex-row">
+								<div class="input-wrapper">
+									<select class="input" name="report_id" id="report-selector">
+										<option value="">Select a Report</option>
+									</select>
+								</div>
+							</div>
+							<div class="flex-row">
+								<button id="choose_report_btn" class="btn btn-default flex-12" data-dynaform-fn="choose_report">
+									<i class="icon-magic"></i>
+									<span>Choose</span>
+								</button>
+							</div>
+							<div class="flex-row checking-indicator">
+								<span>Checking Requirements</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!-- #datasource-form END -->
+			<!-- #datasource-options BEGIN -->
+			<form class="box no-bottom-margin dmsa-dynaform collapsed" id="datasource-options" target="target-placeholder">
+				<div class="box-header accordion-heading">
+					<button class="btn btn-blue start-over-btn" data-dynaform-fn="start_over">
+						<i class="icon-reply"></i>
+						<span>Back</span>
+					</button>
+					<span class="title">Report Options</span>
+				</div>
+				<div class="box-content padded accordion-body collapse" id="step-2-body">
+					<div id="datasource-options-container">
+					</div>
+					<div class="flex-row button-row" data-dynaform-item="buttons">
+					</div>
+				</div>
+			</form>
+			<!-- #datasource-options END -->
+		</div>
+		<div class="box-content">
+			<div class="padded"></div>
+			<div id="workbook-wrapper" class="box">
+				<div id="workbook-tabs" class="box-header">
+					<ul class="nav nav-tabs nav-tabs-left">
+					</ul>
+				</div>
+				<div class="box-content padded">
+					<div id="workbook-content" class="tab-content">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="confirm_options_modal" class="modal fade">
+		<div class="modal-dialog dmsa-modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+					<h4 class="modal-title" data-field="modal-title">Confirm Parameters</h4>
+				</div>
+				<div class="modal-body">
+				</div>
+				<!-- <div class="alert-block">
+					<h4>Confirm Request</h4>
+					<p class="subtext"></p>
+				</div> -->
+				<div class="modal-footer">
+					<button class="btn btn-default" data-button="close" data-dismiss="modal" type="button">Cancel</button>
+					<button class="btn btn-blue" type="button" data-button="confirm">Confirm</button>
+				</div>
+				<!-- <div class="alert-footer">
+					<button class="btn btn-default" data-button="close" data-dismiss="modal" type="button">Cancel</button>
+					<button class="btn btn-blue" type="button" data-button="confirm">Confirm</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>

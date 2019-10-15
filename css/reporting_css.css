@@ -1,0 +1,3404 @@
+/*
+Document   : reporting_css
+Created on : June 8, 2016
+Author     : Eric Roberts
+*/
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li, table.dataTable > tbody > tr.child > td.child ul.child-row-block li, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li, .flex-row, .dmsa-module-wrapper .button-row {
+				display: flex;
+				flex-direction: row;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > *, .flex-row > *, .dmsa-module-wrapper .button-row > * {
+				width: auto !important;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.halves > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.halves > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.halves > *, .halves.flex-row > *, .dmsa-module-wrapper .halves.button-row > * {
+				flex: 0 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.thirds > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.thirds > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.thirds > *, .thirds.flex-row > *, .dmsa-module-wrapper .thirds.button-row > * {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.quarters > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.quarters > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.quarters > *, .quarters.flex-row > *, .dmsa-module-wrapper .quarters.button-row > *, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.fourths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.fourths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.fourths > *, .fourths.flex-row > *, .dmsa-module-wrapper .fourths.button-row > * {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.fifths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.fifths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.fifths > *, .fifths.flex-row > *, .dmsa-module-wrapper .fifths.button-row > * {
+				flex: 0 0 20%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.sixths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.sixths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.sixths > *, .sixths.flex-row > *, .dmsa-module-wrapper .sixths.button-row > * {
+				flex: 0 0 16.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.sevenths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.sevenths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.sevenths > *, .sevenths.flex-row > *, .dmsa-module-wrapper .sevenths.button-row > * {
+				flex: 0 0 14.28571%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.two-to-one > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.two-to-one > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.two-to-one > *, .two-to-one.flex-row > *, .dmsa-module-wrapper .two-to-one.button-row > * {
+				flex: 0 0 66.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.two-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.two-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.two-to-one > *:last-child, .two-to-one.flex-row > *:last-child, .dmsa-module-wrapper .two-to-one.button-row > *:last-child {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-two > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-two > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-two > *, .one-to-two.flex-row > *, .dmsa-module-wrapper .one-to-two.button-row > * {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-two > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-two > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-two > *:last-child, .one-to-two.flex-row > *:last-child, .dmsa-module-wrapper .one-to-two.button-row > *:last-child {
+				flex: 0 0 66.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.three-to-one > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.three-to-one > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.three-to-one > *, .three-to-one.flex-row > *, .dmsa-module-wrapper .three-to-one.button-row > * {
+				flex: 0 0 75%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.three-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.three-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.three-to-one > *:last-child, .three-to-one.flex-row > *:last-child, .dmsa-module-wrapper .three-to-one.button-row > *:last-child {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-three > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-three > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-three > *, .one-to-three.flex-row > *, .dmsa-module-wrapper .one-to-three.button-row > * {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-three > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-three > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-three > *:last-child, .one-to-three.flex-row > *:last-child, .dmsa-module-wrapper .one-to-three.button-row > *:last-child {
+				flex: 0 0 75%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *, .expanded-center.flex-row > *, .dmsa-module-wrapper .expanded-center.button-row > * {
+				flex: 1 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *:first-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *:first-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *:first-child, .expanded-center.flex-row > *:first-child, .dmsa-module-wrapper .expanded-center.button-row > *:first-child, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *:last-child, .expanded-center.flex-row > *:last-child, .dmsa-module-wrapper .expanded-center.button-row > *:last-child {
+				flex: 0 1 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *, .contracted-center.flex-row > *, .dmsa-module-wrapper .contracted-center.button-row > * {
+				flex: 0 1 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *:first-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *:first-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *:first-child, .contracted-center.flex-row > *:first-child, .dmsa-module-wrapper .contracted-center.button-row > *:first-child, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *:last-child, .contracted-center.flex-row > *:last-child, .dmsa-module-wrapper .contracted-center.button-row > *:last-child {
+				flex: 1 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.right-dominant > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.right-dominant > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.right-dominant > *, .right-dominant.flex-row > *, .dmsa-module-wrapper .right-dominant.button-row > * {
+				flex: 0 1 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.right-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.right-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.right-dominant > *:last-child, .right-dominant.flex-row > *:last-child, .dmsa-module-wrapper .right-dominant.button-row > *:last-child {
+				flex: 1 1 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-dominant > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-dominant > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-dominant > *, .left-dominant.flex-row > *, .dmsa-module-wrapper .left-dominant.button-row > * {
+				flex: 1 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-dominant > *:last-child, .left-dominant.flex-row > *:last-child, .dmsa-module-wrapper .left-dominant.button-row > *:last-child {
+				flex: 1 1 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-marginal > *:not(:first-child), table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-marginal > *:not(:first-child), table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-marginal > *:not(:first-child), .left-marginal.flex-row > *:not(:first-child), .dmsa-module-wrapper .left-marginal.button-row > *:not(:first-child) {
+				margin-left: 10px;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-padded > *:not(:first-child), table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-padded > *:not(:first-child), table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-padded > *:not(:first-child), .left-padded.flex-row > *:not(:first-child), .dmsa-module-wrapper .left-padded.button-row > *:not(:first-child) {
+				padding-left: 10px;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li .greedy, table.dataTable > tbody > tr.child > td.child ul.child-row-block li .greedy, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li .greedy, .flex-row .greedy, .dmsa-module-wrapper .button-row .greedy {
+				flex: 1 0 auto;
+}
+
+.flex-1 {
+				flex: 1 0 8.33333%;
+}
+
+.flex-2 {
+				flex: 1 0 16.66667%;
+}
+
+.flex-3 {
+				flex: 1 0 25%;
+}
+
+.flex-4 {
+				flex: 1 0 33.33333%;
+}
+
+.flex-5 {
+				flex: 1 0 41.66667%;
+}
+
+.flex-6 {
+				flex: 1 0 50%;
+}
+
+.flex-7 {
+				flex: 1 0 58.33333%;
+}
+
+.flex-8 {
+				flex: 1 0 66.66667%;
+}
+
+.flex-9 {
+				flex: 1 0 75%;
+}
+
+.flex-10 {
+				flex: 1 0 83.33333%;
+}
+
+.flex-11 {
+				flex: 1 0 91.66667%;
+}
+
+.flex-12 {
+				flex: 1 0 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > * {
+				flex: 1 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > *:last-child {
+				flex: 1 1 100%;
+}
+
+form.dmsa-dynaform .input-wrapper.ajax-working::after {
+				content: url("../../../../../images/loading.gif");
+				width: 16px;
+				height: 16px;
+}
+
+th.unseen {
+				border: none !important;
+				background: none !important;
+				box-shadow: none !important;
+}
+
+.dmsa-module-wrapper div.dataTables_wrapper table.lock-row-ui tr .btn {
+				opacity: 0.5;
+				pointer-events: none;
+}
+
+.dmsa-module-wrapper table.dataTable thead th {
+				white-space: nowrap;
+}
+
+.dmsa-module-wrapper table.dataTable td {
+				vertical-align: middle;
+}
+
+.dmsa-module-wrapper table.dataTable td span.nowrap {
+				white-space: nowrap;
+}
+
+.dmsa-module-wrapper table.dataTable.row-grouping tbody tr td:first-child {
+				border-left: 1px solid #eaebef;
+}
+
+.dmsa-module-wrapper table.dataTable.dtr-inline.collapsed tbody td:first-child::before,
+.dmsa-module-wrapper table.dataTable.dtr-inline.collapsed tbody th:first-child::before {
+				top: auto !important;
+				padding: 0;
+				margin: 0;
+}
+
+.dmsa-module-wrapper table th.none {
+				display: none;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul {
+				display: block;
+}
+
+.dmsa-module-wrapper th[data-label-above] {
+				position: relative;
+}
+
+.dmsa-module-wrapper th[data-label-above]::before {
+				content: attr(data-label-above);
+				font-size: 12px;
+				font-weight: bold;
+				position: absolute;
+				top: -30px;
+				left: 0;
+				right: 0;
+				height: 30px;
+				text-align: center;
+				opacity: 0;
+				transition: all 1.5s ease-in-out;
+}
+
+.dmsa-module-wrapper th[data-label-above]:hover::before {
+				opacity: 1;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper {
+				/*
+		// Old Subtable - Early Solution (Deprecated)
+		.subtable-wrapper {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			max-height: 30px;
+			transition: all 0.25s ease-in-out;
+			.subtable-switch {
+				position: relative;
+				flex: 0 0 30px;
+				width: 100%;
+				&::after {
+					content: 'Show';
+				}
+			}
+			.subtable-content {
+				width: 100%;
+				position: relative;
+				table {
+					width: 100%;
+					th, td { padding: 0 2px; }
+					.cell-value {
+						display: block;
+						text-align: center;
+					}
+					.null-value {
+						font-style: italic;
+					}
+				}
+			}
+			&.shown {
+				max-height: 200px;
+				.subtable-switch {
+					&::after {
+						content: 'Hide';
+					}
+				}
+			}
+		}
+		*/
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .dataTables_length {
+				display: block;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .dataTables_info {
+				display: block;
+				text-align: right;
+}
+
+@media (min-width: 680px) {
+				.dmsa-module-wrapper .dataTables_wrapper .dataTables_info {
+								text-align: center;
+				}
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .dataTables_paginate {
+				margin-top: 0;
+				text-align: center;
+}
+
+@media (min-width: 680px) {
+				.dmsa-module-wrapper .dataTables_wrapper .dataTables_paginate {
+								text-align: right;
+				}
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .col-to-row-tablet,
+.dmsa-module-wrapper .dataTables_wrapper .flex-row, .dmsa-module-wrapper .dataTables_wrapper .button-row {
+				padding-bottom: 10px;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .col-to-row-tablet > *,
+.dmsa-module-wrapper .dataTables_wrapper .flex-row > *, .dmsa-module-wrapper .dataTables_wrapper .button-row > * {
+				align-items: center;
+				flex: 1 1 50%;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .col-to-row-tablet label,
+.dmsa-module-wrapper .dataTables_wrapper .flex-row label, .dmsa-module-wrapper .dataTables_wrapper .button-row label {
+				white-space: nowrap;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .flex-row:last-child, .dmsa-module-wrapper .dataTables_wrapper .button-row:last-child {
+				align-items: center;
+				justify-content: center;
+}
+
+@media (min-width: 680px) {
+				.dmsa-module-wrapper .dataTables_wrapper .flex-row:last-child, .dmsa-module-wrapper .dataTables_wrapper .button-row:last-child {
+								justify-content: flex-end;
+				}
+}
+
+.dmsa-module-wrapper .dataTables_wrapper th:not(:first-child) {
+				text-align: center;
+}
+
+@media (min-width: 320px) {
+				.dmsa-module-wrapper .dataTables_wrapper .totals-table th:first-child {
+								width: 300px;
+				}
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .ctr-col {
+				text-align: center;
+}
+
+.dmsa-module-wrapper .dataTables_wrapper .ctr-col > .ibutton-container {
+				display: inline-block;
+}
+
+table.dataTable > tbody > tr.child > td.child > ul.child-row-block:empty {
+				display: none;
+}
+
+table.dataTable > tbody > tr.child > td.child {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+}
+
+table.dataTable > tbody > tr.child > td.child:empty {
+				display: none;
+}
+
+table.dataTable > tbody > tr.child > td.child ul.child-row-block, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul {
+				display: block;
+				flex: 1 0 100%;
+				margin: 0 2px 10px 2px;
+}
+
+@media (679px: 500px) {
+				table.dataTable > tbody > tr.child > td.child ul.child-row-block, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul {
+								flex: 1 0 50%;
+				}
+}
+
+@media (min-width: 1024px) {
+				table.dataTable > tbody > tr.child > td.child ul.child-row-block, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul {
+								flex: 1 0 33.33333%;
+				}
+}
+
+@media (min-width: 1180px) {
+				table.dataTable > tbody > tr.child > td.child ul.child-row-block, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul {
+								flex: 1 0 25%;
+				}
+}
+
+table.dataTable > tbody > tr.child > td.child ul.child-row-block li > span, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > span {
+				flex: 1 0 150px;
+}
+
+table.dataTable > tbody > tr.child > td.child ul.child-row-block li > span.header, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > span.header {
+				font-weight: bold;
+				padding-left: 5px;
+}
+
+table.dataTable > tbody > tr.child > td.child ul.child-row-block li > span.header::after, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > span.header::after {
+				content: ":";
+				margin-right: 5px;
+}
+
+table.dataTable > tbody > tr.child > td.child ul.child-row-block li > span.cell-value, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > span.cell-value {
+				flex: 1 1 100%;
+}
+
+table.dataTable > tbody > tr.child > td.child div.hiddenColumns {
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				position: relative;
+}
+
+table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li:only-child {
+				display: none;
+}
+
+table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li:first-child {
+				background: #E4E4E6;
+				color: #000000;
+				font-size: 1.1em;
+				margin-bottom: 5px;
+				padding: 5px;
+}
+
+table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li:not(:first-child) {
+				padding: 0;
+				margin: 0 0 1px 0;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li, table.dataTable > tbody > tr.child > td.child ul.child-row-block li, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li, .flex-row, .dmsa-module-wrapper .button-row {
+				display: flex;
+				flex-direction: row;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li > *, .flex-row > *, .dmsa-module-wrapper .button-row > * {
+				width: auto !important;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.halves > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.halves > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.halves > *, .halves.flex-row > *, .dmsa-module-wrapper .halves.button-row > * {
+				flex: 0 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.thirds > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.thirds > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.thirds > *, .thirds.flex-row > *, .dmsa-module-wrapper .thirds.button-row > * {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.quarters > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.quarters > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.quarters > *, .quarters.flex-row > *, .dmsa-module-wrapper .quarters.button-row > *, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.fourths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.fourths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.fourths > *, .fourths.flex-row > *, .dmsa-module-wrapper .fourths.button-row > * {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.fifths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.fifths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.fifths > *, .fifths.flex-row > *, .dmsa-module-wrapper .fifths.button-row > * {
+				flex: 0 0 20%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.sixths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.sixths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.sixths > *, .sixths.flex-row > *, .dmsa-module-wrapper .sixths.button-row > * {
+				flex: 0 0 16.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.sevenths > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.sevenths > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.sevenths > *, .sevenths.flex-row > *, .dmsa-module-wrapper .sevenths.button-row > * {
+				flex: 0 0 14.28571%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.two-to-one > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.two-to-one > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.two-to-one > *, .two-to-one.flex-row > *, .dmsa-module-wrapper .two-to-one.button-row > * {
+				flex: 0 0 66.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.two-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.two-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.two-to-one > *:last-child, .two-to-one.flex-row > *:last-child, .dmsa-module-wrapper .two-to-one.button-row > *:last-child {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-two > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-two > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-two > *, .one-to-two.flex-row > *, .dmsa-module-wrapper .one-to-two.button-row > * {
+				flex: 0 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-two > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-two > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-two > *:last-child, .one-to-two.flex-row > *:last-child, .dmsa-module-wrapper .one-to-two.button-row > *:last-child {
+				flex: 0 0 66.66667%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.three-to-one > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.three-to-one > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.three-to-one > *, .three-to-one.flex-row > *, .dmsa-module-wrapper .three-to-one.button-row > * {
+				flex: 0 0 75%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.three-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.three-to-one > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.three-to-one > *:last-child, .three-to-one.flex-row > *:last-child, .dmsa-module-wrapper .three-to-one.button-row > *:last-child {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-three > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-three > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-three > *, .one-to-three.flex-row > *, .dmsa-module-wrapper .one-to-three.button-row > * {
+				flex: 0 0 25%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.one-to-three > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.one-to-three > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.one-to-three > *:last-child, .one-to-three.flex-row > *:last-child, .dmsa-module-wrapper .one-to-three.button-row > *:last-child {
+				flex: 0 0 75%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *, .expanded-center.flex-row > *, .dmsa-module-wrapper .expanded-center.button-row > * {
+				flex: 1 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *:first-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *:first-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *:first-child, .expanded-center.flex-row > *:first-child, .dmsa-module-wrapper .expanded-center.button-row > *:first-child, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.expanded-center > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.expanded-center > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.expanded-center > *:last-child, .expanded-center.flex-row > *:last-child, .dmsa-module-wrapper .expanded-center.button-row > *:last-child {
+				flex: 0 1 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *, .contracted-center.flex-row > *, .dmsa-module-wrapper .contracted-center.button-row > * {
+				flex: 0 1 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *:first-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *:first-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *:first-child, .contracted-center.flex-row > *:first-child, .dmsa-module-wrapper .contracted-center.button-row > *:first-child, .dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.contracted-center > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.contracted-center > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.contracted-center > *:last-child, .contracted-center.flex-row > *:last-child, .dmsa-module-wrapper .contracted-center.button-row > *:last-child {
+				flex: 1 0 33.33333%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.right-dominant > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.right-dominant > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.right-dominant > *, .right-dominant.flex-row > *, .dmsa-module-wrapper .right-dominant.button-row > * {
+				flex: 0 1 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.right-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.right-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.right-dominant > *:last-child, .right-dominant.flex-row > *:last-child, .dmsa-module-wrapper .right-dominant.button-row > *:last-child {
+				flex: 1 1 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-dominant > *, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-dominant > *, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-dominant > *, .left-dominant.flex-row > *, .dmsa-module-wrapper .left-dominant.button-row > * {
+				flex: 1 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-dominant > *:last-child, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-dominant > *:last-child, .left-dominant.flex-row > *:last-child, .dmsa-module-wrapper .left-dominant.button-row > *:last-child {
+				flex: 1 1 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-marginal > *:not(:first-child), table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-marginal > *:not(:first-child), table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-marginal > *:not(:first-child), .left-marginal.flex-row > *:not(:first-child), .dmsa-module-wrapper .left-marginal.button-row > *:not(:first-child) {
+				margin-left: 10px;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li.left-padded > *:not(:first-child), table.dataTable > tbody > tr.child > td.child ul.child-row-block li.left-padded > *:not(:first-child), table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li.left-padded > *:not(:first-child), .left-padded.flex-row > *:not(:first-child), .dmsa-module-wrapper .left-padded.button-row > *:not(:first-child) {
+				padding-left: 10px;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li .greedy, table.dataTable > tbody > tr.child > td.child ul.child-row-block li .greedy, table.dataTable > tbody > tr.child > td.child div.hiddenColumns > ul > li .greedy, .flex-row .greedy, .dmsa-module-wrapper .button-row .greedy {
+				flex: 1 0 auto;
+}
+
+.flex-1 {
+				flex: 1 0 8.33333%;
+}
+
+.flex-2 {
+				flex: 1 0 16.66667%;
+}
+
+.flex-3 {
+				flex: 1 0 25%;
+}
+
+.flex-4 {
+				flex: 1 0 33.33333%;
+}
+
+.flex-5 {
+				flex: 1 0 41.66667%;
+}
+
+.flex-6 {
+				flex: 1 0 50%;
+}
+
+.flex-7 {
+				flex: 1 0 58.33333%;
+}
+
+.flex-8 {
+				flex: 1 0 66.66667%;
+}
+
+.flex-9 {
+				flex: 1 0 75%;
+}
+
+.flex-10 {
+				flex: 1 0 83.33333%;
+}
+
+.flex-11 {
+				flex: 1 0 91.66667%;
+}
+
+.flex-12 {
+				flex: 1 0 100%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > * {
+				flex: 1 0 50%;
+}
+
+.dmsa-module-wrapper table.dataTable > tbody > tr.child ul li > *:last-child {
+				flex: 1 1 100%;
+}
+
+form.dmsa-dynaform .input-wrapper.ajax-working::after {
+				content: url("../../../../../images/loading.gif");
+				width: 16px;
+				height: 16px;
+}
+
+.dmsa-module-wrapper .modal-dialog .modal-content .modal-header h4 {
+				display: flex;
+				align-items: center;
+}
+
+.dmsa-module-wrapper .modal-dialog .modal-content .modal-header h4 i {
+				margin-right: 5px;
+}
+
+.dmsa-module-wrapper .modal-content.alert {
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+				border: 1px solid #f1d276 !important;
+}
+
+.dmsa-module-wrapper .modal-content.alert .alert-block {
+				text-align: center;
+}
+
+.dmsa-module-wrapper .modal-content.alert .alert-footer {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+}
+
+.dmsa-module-wrapper .modal-content.alert .alert-footer button:not(:first-child) {
+				margin-left: 5px;
+}
+
+.dmsa-module-wrapper .modal-foreground {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: rgba(255, 255, 255, 0.7);
+				transition: all 0.5s ease-in-out;
+				opacity: 1;
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 200px;
+}
+
+.dmsa-module-wrapper .modal-foreground.invisible {
+				opacity: 0;
+}
+
+.dmsa-module-wrapper .modal-foreground .message-panel {
+				background-color: white;
+				border: 1px solid #cdcdcd;
+				border-radius: 3px;
+				padding: 10px;
+}
+
+.dmsa-module-wrapper .modal-foreground .message-panel p {
+				margin: 0;
+				text-align: center;
+}
+
+.dmsa-module-wrapper .modal-foreground .message-panel p:first-child::before {
+				content: url("../../../../../images/loading.gif");
+				display: inline;
+				top: 3px;
+				width: 16px;
+				height: 16px;
+				position: relative;
+				margin-right: 5px;
+}
+
+.dmsa-modal {
+				position: relative;
+}
+
+.dmsa-modal > .modal-content::after {
+				transition: all 0.5s ease-in-out;
+}
+
+.dmsa-modal form.ajax-working::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(255, 255, 255, 0.5) url("../../../../../images/spin.gif") no-repeat center center/32px 32px;
+}
+
+.dmsa-modal.ajax-working .modal-content::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(255, 255, 255, 0.5) url("../../../../../images/spin.gif") no-repeat center center/32px 32px;
+}
+
+form.dmsa-dynaform .select2-container .select2-selection--single {
+				height: 35px;
+}
+
+form.dmsa-dynaform .input-wrapper input[type="text"], form.dmsa-dynaform .input-wrapper input[type="password"], form.dmsa-dynaform .input-wrapper input[type="number"], form.dmsa-dynaform .input-wrapper input[type="range"], form.dmsa-dynaform .input-wrapper input[type="email"], form.dmsa-dynaform .input-wrapper input[type="tel"], form.dmsa-dynaform .input-wrapper input[type="url"] {
+				border: transparent 2px solid;
+				transition: border 0.5s ease-in-out;
+}
+
+form.dmsa-dynaform .input-wrapper span.error-msg {
+				opacity: 0;
+				transition: opacity 0.5s ease-in-out;
+}
+
+form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="text"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="text"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="text"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="text"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="password"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="password"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="password"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="password"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="number"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="number"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="number"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="number"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="range"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="range"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="range"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="range"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="email"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="email"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="email"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="email"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="tel"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="tel"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="tel"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="tel"], form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) input[type="url"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) input[type="url"], form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) input[type="url"], form.dmsa-dynaform.show-errors .input-wrapper.is-invalid input[type="url"] {
+				border: red 2px solid;
+}
+
+form.dmsa-dynaform .input-wrapper.is-invalid.dependency-invalid:not(.ajax-working) span.error-msg, form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.upload-wrapper:not(.is-empty):not(.ajax-working) span.error-msg, form.dmsa-dynaform .input-wrapper.is-invalid.is-dirty.has-focused:not(.ajax-working) span.error-msg, form.dmsa-dynaform.show-errors .input-wrapper.is-invalid span.error-msg {
+				opacity: 1;
+}
+
+form.dmsa-dynaform .group-legend {
+				letter-spacing: -1px;
+				margin-bottom: 20px;
+}
+
+form.dmsa-dynaform .inline-field-control-wrapper {
+				order: 2;
+				position: relative;
+				height: 20px;
+				top: 20px;
+}
+
+form.dmsa-dynaform a.inline-field-control {
+				font-size: 13px;
+}
+
+form.dmsa-dynaform a.inline-field-control i {
+				margin-right: 5px;
+				font-size: 20px;
+}
+
+form.dmsa-dynaform .input-wrapper {
+				flex: auto;
+}
+
+form.dmsa-dynaform.show-errors .input-wrapper.is-invalid .select2-container .select2-selection {
+				border: red 2px solid;
+				transition: border 0.5s ease-in-out;
+}
+
+form.dmsa-dynaform > div.box-header {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+}
+
+form.dmsa-dynaform > div.box-header button {
+				margin-left: 10px;
+}
+
+form.dmsa-dynaform > div.box-content {
+				position: relative;
+}
+
+form.dmsa-dynaform.ajax-working > div.box-content::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 1;
+				background: rgba(255, 255, 255, 0.5) url("../../../../../images/spin.gif") no-repeat center center/32px 32px;
+}
+
+form.dmsa-dynaform .input-wrapper {
+				display: flex;
+				flex-direction: row;
+				position: relative;
+}
+
+form.dmsa-dynaform .input-wrapper.checkbox-group {
+				flex-direction: column;
+				flex-wrap: wrap;
+}
+
+form.dmsa-dynaform .input-wrapper.checkbox-group .checkbox-wrapper {
+				width: 100%;
+}
+
+form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+				flex: 0 0 31px;
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-10 {
+								max-height: 223.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-25 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-40 {
+								max-height: 1060.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-65 {
+								max-height: 1674px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-80 {
+								max-height: 1953px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-100 {
+								max-height: 2511px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+								width: 100%;
+				}
+}
+
+@media (min-width: 500px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-10 {
+								max-height: 139.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-25 {
+								max-height: 362.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-40 {
+								max-height: 558px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-65 {
+								max-height: 920.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-80 {
+								max-height: 1116px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-100 {
+								max-height: 1395px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+								width: 50%;
+				}
+}
+
+@media (min-width: 680px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-40 {
+								max-height: 390.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-65 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-80 {
+								max-height: 753.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-100 {
+								max-height: 948.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+								width: 33.3333%;
+				}
+}
+
+@media (min-width: 992px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-10 {
+								max-height: 139.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-25 {
+								max-height: 362.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-40 {
+								max-height: 558px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-65 {
+								max-height: 920.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-80 {
+								max-height: 1116px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-100 {
+								max-height: 1395px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+								width: 50%;
+				}
+}
+
+@media (min-width: 1024px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-40 {
+								max-height: 390.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-65 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-80 {
+								max-height: 753.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns.lte-100 {
+								max-height: 948.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.loose-columns .checkbox-wrapper {
+								width: 33.3333%;
+				}
+}
+
+form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+				flex: 0 0 31px;
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 223.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 1060.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 1674px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 1953px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 2511px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 100%;
+				}
+}
+
+@media (min-width: 500px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 139.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 306.9px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 474.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 725.4px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 948.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 1171.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 50%;
+				}
+}
+
+@media (min-width: 680px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 334.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 530.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 641.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 781.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 25%;
+				}
+}
+
+@media (min-width: 852px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 83.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 195.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 279px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 418.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 976.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 20%;
+				}
+}
+
+@media (min-width: 992px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 334.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 530.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 641.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 781.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 25%;
+				}
+}
+
+@media (min-width: 1024px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-10 {
+								max-height: 83.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-25 {
+								max-height: 195.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-40 {
+								max-height: 279px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-65 {
+								max-height: 418.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-80 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns.lte-100 {
+								max-height: 976.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.medium-columns .checkbox-wrapper {
+								width: 20%;
+				}
+}
+
+form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+				flex: 0 0 31px;
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 223.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 446.4px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 892.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 1339.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 1953px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 2511px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 50%;
+				}
+}
+
+@media (min-width: 500px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 390.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 613.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 753.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 948.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 33.3333%;
+				}
+}
+
+@media (min-width: 680px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 334.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 530.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 641.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 781.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 25%;
+				}
+}
+
+@media (min-width: 852px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 83.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 279px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 474.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 558px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 697.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 20%;
+				}
+}
+
+@media (min-width: 992px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 111.6px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 334.8px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 530.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 641.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 781.2px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 25%;
+				}
+}
+
+@media (min-width: 1024px) {
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-10 {
+								max-height: 83.7px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-25 {
+								max-height: 251.1px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-40 {
+								max-height: 279px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-65 {
+								max-height: 474.3px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-80 {
+								max-height: 558px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns.lte-100 {
+								max-height: 697.5px;
+				}
+				form.dmsa-dynaform .input-wrapper.checkbox-group.tight-columns .checkbox-wrapper {
+								width: 20%;
+				}
+}
+
+form.dmsa-dynaform .input-wrapper .datepicker-inline {
+				padding: 5px 0 0 0;
+}
+
+form.dmsa-dynaform .input-wrapper:not(.hidden-input) {
+				padding-bottom: 15px;
+				margin-top: 5px;
+}
+
+form.dmsa-dynaform .input-wrapper[data-label-above]::before {
+				content: attr(data-label-above);
+				font-size: 10px;
+				font-weight: bold;
+				text-transform: uppercase;
+				position: absolute;
+				top: 0px;
+				left: 2px;
+}
+
+form.dmsa-dynaform .input-wrapper.ajax-working::after {
+				display: block;
+				top: 22px;
+				right: 10px;
+				position: absolute;
+}
+
+form.dmsa-dynaform .input-wrapper .input {
+				display: block;
+				width: 100%;
+}
+
+form.dmsa-dynaform .input-wrapper input[type="text"],
+form.dmsa-dynaform .input-wrapper input[type="password"] {
+				height: 39px;
+				display: block;
+				width: 100%;
+				margin-bottom: 0;
+}
+
+form.dmsa-dynaform .input-wrapper span.error-msg {
+				font-size: 11px;
+				color: red;
+				position: absolute;
+				left: 0;
+				top: calc(100% - 16px);
+				right: 0;
+}
+
+form.dmsa-dynaform .input-wrapper.toggle-wrapper {
+				flex-direction: column;
+				align-items: center;
+				padding: 8px 0 0 0;
+				margin-top: 0;
+}
+
+form.dmsa-dynaform .input-wrapper.toggle-wrapper[data-label-above]::before {
+				position: relative;
+				white-space: nowrap;
+				display: block;
+				text-align: center;
+				padding: 0 6px 4px 0;
+}
+
+form.dmsa-dynaform .daterange-picker-wrapper {
+				display: flex;
+				flex-direction: row;
+}
+
+form.dmsa-dynaform .daterange-picker-wrapper > .input-wrapper:first-child input {
+				text-align: right;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				border-right-width: 0;
+				padding: 0 10px 0 0;
+}
+
+form.dmsa-dynaform .daterange-picker-wrapper > .input-wrapper:last-child input {
+				text-align: left;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				border-left-width: 0;
+				padding: 0 0 0 10px;
+}
+
+form.dmsa-dynaform .daterange-picker-wrapper > .input-decoration {
+				margin-top: 7px;
+				padding: 0 0 15px 0;
+				width: 40px;
+}
+
+form.dmsa-dynaform .daterange-picker-wrapper > .input-decoration span {
+				height: 35px;
+				font-size: 14px;
+				color: white;
+				background-color: #6eb0d1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+}
+
+form.dmsa-dynaform .flex-row > .input-wrapper:not(:only-child):not(:first-child), form.dmsa-dynaform .dmsa-module-wrapper .button-row > .input-wrapper:not(:only-child):not(:first-child), .dmsa-module-wrapper form.dmsa-dynaform .button-row > .input-wrapper:not(:only-child):not(:first-child) {
+				margin-left: 2px;
+}
+
+form.dmsa-dynaform .flex-row > .input-wrapper:not(:only-child):not(:last-child), form.dmsa-dynaform .dmsa-module-wrapper .button-row > .input-wrapper:not(:only-child):not(:last-child), .dmsa-module-wrapper form.dmsa-dynaform .button-row > .input-wrapper:not(:only-child):not(:last-child) {
+				margin-right: 2px;
+}
+
+form.table-controls .checkbox-group, form.table-controls .radio-group {
+				width: 100%;
+				position: relative;
+				margin-bottom: 10px;
+				padding-bottom: 5px;
+				border-bottom: 2px solid #c3c5ce;
+}
+
+@media (min-width: 500px) {
+				form.table-controls .checkbox-group, form.table-controls .radio-group {
+								display: flex;
+								justify-content: space-between;
+								margin-bottom: 0;
+								padding-bottom: 0;
+								border-bottom: none;
+								width: auto;
+								flex: 1 1 auto;
+				}
+				form.table-controls .checkbox-group:not(:last-child), form.table-controls .radio-group:not(:last-child) {
+								margin-right: 5px;
+								border-right: 2px solid #c3c5ce;
+				}
+}
+
+form.table-controls .checkbox-column, form.table-controls .radio-column {
+				width: 100%;
+}
+
+@media (min-width: 500px) {
+				form.table-controls .checkbox-column, form.table-controls .radio-column {
+								width: auto;
+								max-width: 200px;
+								padding-right: 5px;
+				}
+}
+
+form.table-controls .checkbox-wrapper, form.table-controls .radio-wrapper {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+}
+
+form.table-controls .checkbox-wrapper label, form.table-controls .radio-wrapper label {
+				white-space: nowrap;
+}
+
+form.table-controls .select-wrapper, form.table-controls .text-input-wrapper {
+				margin-bottom: 5px;
+				position: relative;
+}
+
+form.table-controls .select-wrapper select, form.table-controls .text-input-wrapper select, form.table-controls .select-wrapper input, form.table-controls .text-input-wrapper input {
+				width: 100%;
+				height: 37px;
+}
+
+form.table-controls div.icheckbox_flat-blue, form.table-controls div.iradio_flat-blue {
+				margin-right: 3px;
+}
+
+.dmsa-module-wrapper fieldset {
+				margin-bottom: 20px;
+}
+
+.dmsa-module-wrapper fieldset legend {
+				margin-bottom: 1px;
+}
+
+.dmsa-module-wrapper fieldset legend.align-right {
+				text-align: right;
+}
+
+.dmsa-module-wrapper fieldset legend.align-center {
+				text-align: center;
+}
+
+.dmsa-module-wrapper fieldset.compact {
+				margin-bottom: 0;
+}
+
+.dmsa-module-wrapper fieldset.compact legend {
+				color: currentColor;
+				font-size: 10px;
+				font-weight: bold;
+				text-transform: uppercase;
+}
+
+.dmsa-module-wrapper .btn > i:not(:only-child) {
+				margin-right: 5px;
+}
+
+.dmsa-module-wrapper .btn.btn-full {
+				display: block;
+				padding: 6px 0;
+				width: 100%;
+}
+
+.dmsa-module-wrapper .button-row {
+				flex-wrap: wrap;
+}
+
+.dmsa-module-wrapper .button-row > *:not(:last-child) {
+				margin-right: 10px;
+}
+
+.dmsa-module-wrapper .button-row .btn-group {
+				position: relative;
+				padding-top: 15px;
+				margin-top: 5px;
+}
+
+.dmsa-module-wrapper .button-row .checkbox-wrapper {
+				position: relative;
+				margin-top: 5px;
+}
+
+.dmsa-module-wrapper .button-row .checkbox-wrapper .icheckbox_flat-aero {
+				top: 5px;
+}
+
+.dmsa-module-wrapper .button-row .checkbox-wrapper .icheckbox_flat-aero + label {
+				top: 0;
+				margin-right: 10px;
+}
+
+.dmsa-module-wrapper select {
+				width: auto;
+}
+
+.dmsa-module-wrapper select.medium-width {
+				width: 220px;
+}
+
+.dmsa-module-wrapper select.minimum-width {
+				min-width: 220px;
+}
+
+.dmsa-module-wrapper .checkbox-wrapper {
+				padding-right: 5px;
+}
+
+.dmsa-module-wrapper .radio-row {
+				justify-content: flex-start;
+}
+
+.dmsa-module-wrapper .radio-row .radio-wrapper {
+				display: flex;
+				align-items: center;
+				padding: 0 10px 0 0;
+}
+
+.dmsa-module-wrapper .radio-row .radio-wrapper input {
+				margin: 0 5px 0 0;
+}
+
+.select2-container--open .select2-dropdown {
+				z-index: 99999;
+}
+
+li.select2-results__option[aria-selected="true"] {
+				display: none !important;
+}
+
+.dmsa-module-wrapper .expander {
+				position: relative;
+				margin: 0;
+				padding: 0;
+}
+
+.dmsa-module-wrapper .expander .expander-title {
+				font-weight: 600;
+}
+
+.dmsa-module-wrapper .expander .expander-wrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				padding-top: 20px;
+}
+
+.dmsa-module-wrapper .expander .expander-wrapper > ul {
+				margin: 0;
+}
+
+.dmsa-module-wrapper .expander.closed > .expander-wrapper {
+				max-height: 20px;
+				overflow: hidden;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .expander.closed > .expander-wrapper > ul {
+				max-height: 0;
+				overflow: hidden;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .expander.closed > .expander-wrapper > .expander-toggle::before {
+				width: 0;
+				height: 0;
+				transform: rotate(0deg);
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				border-left: 5px solid currentColor;
+}
+
+.dmsa-module-wrapper .expander.closed > .expander-wrapper > .expander-toggle::after {
+				opacity: 0.5;
+}
+
+.dmsa-module-wrapper .expander.closed > .expander-wrapper.empty-container > .expander-toggle::after {
+				content: '(Empty)';
+}
+
+.dmsa-module-wrapper .expander.open > .expander-wrapper {
+				max-height: 520px;
+				overflow: auto;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .expander.open > .expander-wrapper > ul {
+				max-height: 520px;
+				overflow: auto;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .expander.open > .expander-wrapper > .expander-toggle::before {
+				transform: rotate(90deg);
+				width: 0;
+				height: 0;
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				border-left: 5px solid currentColor;
+}
+
+.dmsa-module-wrapper .expander.open > .expander-wrapper > .expander-toggle::after {
+				opacity: 0;
+}
+
+.dmsa-module-wrapper .expander .expander-toggle {
+				height: 20px;
+				display: block;
+				padding: 0;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding-left: 10px;
+}
+
+.dmsa-module-wrapper .expander .expander-toggle::before {
+				content: '';
+				display: inline-block;
+				transition: all 0.25s ease-in-out;
+				position: relative;
+				top: 1px;
+				right: 10px;
+}
+
+.dmsa-module-wrapper .expander .expander-toggle::after {
+				content: "(" attr(data-child-count) ")";
+				margin-left: 10px;
+				display: inline-block;
+				transition: all 0.25s ease-in-out;
+}
+
+.dmsa-module-wrapper .expander li.expander,
+.dmsa-module-wrapper .expander li.expander-static {
+				padding-left: 20px;
+				position: relative;
+}
+
+.dmsa-module-wrapper .expander li.expander::before,
+.dmsa-module-wrapper .expander li.expander-static::before {
+				content: '';
+				width: 20px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				border-left: 1px solid currentColor;
+}
+
+.dmsa-module-wrapper .expander li.expander::after,
+.dmsa-module-wrapper .expander li.expander-static::after {
+				content: '';
+				width: 10px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				height: 10px;
+				border-bottom: 1px solid currentColor;
+}
+
+.dmsa-module-wrapper .expander li.expander:last-child::before,
+.dmsa-module-wrapper .expander li.expander-static:last-child::before {
+				height: 10px;
+}
+
+.dmsa-module-wrapper .expander li.expander .expander-toggle,
+.dmsa-module-wrapper .expander li.expander-static .expander-toggle {
+				padding-left: 20px;
+}
+
+.dmsa-module-wrapper .expander li.expander .expander-toggle::before,
+.dmsa-module-wrapper .expander li.expander-static .expander-toggle::before {
+				right: 2px;
+				margin-right: 12px;
+}
+
+.dmsa-module-wrapper .expander .static-wrapper {
+				display: flex;
+				flex-direction: row;
+				min-height: 20px;
+}
+
+.dmsa-module-wrapper .expander .static-wrapper > * {
+				margin: 0;
+}
+
+.dmsa-module-wrapper .expander .static-wrapper > *:first-child {
+				flex: 1 0 auto;
+}
+
+.dmsa-module-wrapper .expander .static-wrapper > *:last-child {
+				padding-left: 10px;
+				flex: 0 1 600px;
+}
+
+/* Global */
+.text-centered {
+				text-align: center;
+}
+
+.text-left-aligned {
+				text-align: left;
+}
+
+.text-right-aligned {
+				text-align: right;
+}
+
+.margin-small {
+				margin: 5px;
+}
+
+.top-margin-small {
+				margin-top: 5px;
+}
+
+.left-margin-small {
+				margin-left: 5px;
+}
+
+.no-margin {
+				margin: 0;
+}
+
+.no-bottom-margin {
+				margin-bottom: 0;
+}
+
+.no-top-margin {
+				margin-top: 0;
+}
+
+.no-left-margin {
+				margin-left: 0;
+}
+
+.no-right-margin {
+				margin-right: 0;
+}
+
+.no-padding {
+				padding: 0;
+}
+
+.no-bottom-padding {
+				padding-bottom: 0;
+}
+
+.no-top-padding {
+				padding-top: 0;
+}
+
+.no-left-padding {
+				padding-left: 0;
+}
+
+.no-right-padding {
+				padding-right: 0;
+}
+
+.bottom-padding {
+				padding-bottom: 10px;
+}
+
+.top-padding {
+				padding-top: 10px;
+}
+
+.left-padding {
+				padding-left: 10px;
+}
+
+.right-padding {
+				padding-right: 10px;
+}
+
+.unbroken {
+				white-space: nowrap;
+}
+
+.col-to-row {
+				display: block;
+				align-items: center;
+}
+
+.col-to-row.align-left {
+				justify-content: flex-start;
+}
+
+.col-to-row.align-right {
+				justify-content: flex-end;
+}
+
+.col-to-row.align-center {
+				justify-content: center;
+}
+
+@media (min-width: 320px) {
+				.col-to-row {
+								display: flex;
+								flex-direction: row;
+				}
+				.col-to-row > * {
+								width: auto !important;
+				}
+				.col-to-row.halves > * {
+								flex: 0 0 50%;
+				}
+				.col-to-row.thirds > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row.quarters > *, .col-to-row.fourths > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row.fifths > * {
+								flex: 0 0 20%;
+				}
+				.col-to-row.sixths > * {
+								flex: 0 0 16.66667%;
+				}
+				.col-to-row.sevenths > * {
+								flex: 0 0 14.28571%;
+				}
+				.col-to-row.two-to-one > * {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row.two-to-one > *:last-child {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row.one-to-two > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row.one-to-two > *:last-child {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row.three-to-one > * {
+								flex: 0 0 75%;
+				}
+				.col-to-row.three-to-one > *:last-child {
+								flex: 0 0 25%;
+				}
+				.col-to-row.one-to-three > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row.one-to-three > *:last-child {
+								flex: 0 0 75%;
+				}
+				.col-to-row.expanded-center > * {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row.expanded-center > *:first-child, .col-to-row.expanded-center > *:last-child {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row.contracted-center > * {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row.contracted-center > *:first-child, .col-to-row.contracted-center > *:last-child {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row.right-dominant > * {
+								flex: 0 1 50%;
+				}
+				.col-to-row.right-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row.left-dominant > * {
+								flex: 1 0 50%;
+				}
+				.col-to-row.left-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row.left-marginal > *:not(:first-child) {
+								margin-left: 10px;
+				}
+				.col-to-row.left-padded > *:not(:first-child) {
+								padding-left: 10px;
+				}
+				.col-to-row .greedy {
+								flex: 1 0 auto;
+				}
+}
+
+.col-to-row-tablet {
+				display: block;
+				align-items: center;
+}
+
+.col-to-row-tablet.align-left {
+				justify-content: flex-start;
+}
+
+.col-to-row-tablet.align-right {
+				justify-content: flex-end;
+}
+
+.col-to-row-tablet.align-center {
+				justify-content: center;
+}
+
+@media (min-width: 680px) {
+				.col-to-row-tablet {
+								display: flex;
+								flex-direction: row;
+				}
+				.col-to-row-tablet > * {
+								width: auto !important;
+				}
+				.col-to-row-tablet.halves > * {
+								flex: 0 0 50%;
+				}
+				.col-to-row-tablet.thirds > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-tablet.quarters > *, .col-to-row-tablet.fourths > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row-tablet.fifths > * {
+								flex: 0 0 20%;
+				}
+				.col-to-row-tablet.sixths > * {
+								flex: 0 0 16.66667%;
+				}
+				.col-to-row-tablet.sevenths > * {
+								flex: 0 0 14.28571%;
+				}
+				.col-to-row-tablet.two-to-one > * {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row-tablet.two-to-one > *:last-child {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-tablet.one-to-two > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-tablet.one-to-two > *:last-child {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row-tablet.three-to-one > * {
+								flex: 0 0 75%;
+				}
+				.col-to-row-tablet.three-to-one > *:last-child {
+								flex: 0 0 25%;
+				}
+				.col-to-row-tablet.one-to-three > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row-tablet.one-to-three > *:last-child {
+								flex: 0 0 75%;
+				}
+				.col-to-row-tablet.expanded-center > * {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row-tablet.expanded-center > *:first-child, .col-to-row-tablet.expanded-center > *:last-child {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row-tablet.contracted-center > * {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row-tablet.contracted-center > *:first-child, .col-to-row-tablet.contracted-center > *:last-child {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row-tablet.right-dominant > * {
+								flex: 0 1 50%;
+				}
+				.col-to-row-tablet.right-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row-tablet.left-dominant > * {
+								flex: 1 0 50%;
+				}
+				.col-to-row-tablet.left-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row-tablet.left-marginal > *:not(:first-child) {
+								margin-left: 10px;
+				}
+				.col-to-row-tablet.left-padded > *:not(:first-child) {
+								padding-left: 10px;
+				}
+				.col-to-row-tablet .greedy {
+								flex: 1 0 auto;
+				}
+}
+
+.col-to-row-desktop {
+				display: block;
+				align-items: center;
+}
+
+.col-to-row-desktop.align-left {
+				justify-content: flex-start;
+}
+
+.col-to-row-desktop.align-right {
+				justify-content: flex-end;
+}
+
+.col-to-row-desktop.align-center {
+				justify-content: center;
+}
+
+@media (min-width: 1024px) {
+				.col-to-row-desktop {
+								display: flex;
+								flex-direction: row;
+				}
+				.col-to-row-desktop > * {
+								width: auto !important;
+				}
+				.col-to-row-desktop.halves > * {
+								flex: 0 0 50%;
+				}
+				.col-to-row-desktop.thirds > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-desktop.quarters > *, .col-to-row-desktop.fourths > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row-desktop.fifths > * {
+								flex: 0 0 20%;
+				}
+				.col-to-row-desktop.sixths > * {
+								flex: 0 0 16.66667%;
+				}
+				.col-to-row-desktop.sevenths > * {
+								flex: 0 0 14.28571%;
+				}
+				.col-to-row-desktop.two-to-one > * {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row-desktop.two-to-one > *:last-child {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-desktop.one-to-two > * {
+								flex: 0 0 33.33333%;
+				}
+				.col-to-row-desktop.one-to-two > *:last-child {
+								flex: 0 0 66.66667%;
+				}
+				.col-to-row-desktop.three-to-one > * {
+								flex: 0 0 75%;
+				}
+				.col-to-row-desktop.three-to-one > *:last-child {
+								flex: 0 0 25%;
+				}
+				.col-to-row-desktop.one-to-three > * {
+								flex: 0 0 25%;
+				}
+				.col-to-row-desktop.one-to-three > *:last-child {
+								flex: 0 0 75%;
+				}
+				.col-to-row-desktop.expanded-center > * {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row-desktop.expanded-center > *:first-child, .col-to-row-desktop.expanded-center > *:last-child {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row-desktop.contracted-center > * {
+								flex: 0 1 33.33333%;
+				}
+				.col-to-row-desktop.contracted-center > *:first-child, .col-to-row-desktop.contracted-center > *:last-child {
+								flex: 1 0 33.33333%;
+				}
+				.col-to-row-desktop.right-dominant > * {
+								flex: 0 1 50%;
+				}
+				.col-to-row-desktop.right-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row-desktop.left-dominant > * {
+								flex: 1 0 50%;
+				}
+				.col-to-row-desktop.left-dominant > *:last-child {
+								flex: 1 1 100%;
+				}
+				.col-to-row-desktop.left-marginal > *:not(:first-child) {
+								margin-left: 10px;
+				}
+				.col-to-row-desktop.left-padded > *:not(:first-child) {
+								padding-left: 10px;
+				}
+				.col-to-row-desktop .greedy {
+								flex: 1 0 auto;
+				}
+}
+
+form.dmsa-dynaform.fluid-dynaform .input-wrapper {
+				flex: auto;
+}
+
+form.dmsa-dynaform.fluid-dynaform legend {
+				margin-bottom: 10px;
+}
+
+form.dmsa-dynaform.fluid-dynaform legend .legend-interior {
+				display: flex;
+				justify-content: space-between;
+}
+
+form.dmsa-dynaform.fluid-dynaform legend.with-toolbar {
+				position: relative;
+				margin-bottom: 45px;
+}
+
+form.dmsa-dynaform.fluid-dynaform legend.with-toolbar .inline-toolbar {
+				position: absolute;
+}
+
+form.dmsa-dynaform.fluid-dynaform .inline-field-control-wrapper {
+				order: 2;
+				position: relative;
+				height: 20px;
+				top: 20px;
+}
+
+form.dmsa-dynaform.fluid-dynaform a.inline-field-control {
+				font-size: 13px;
+}
+
+form.dmsa-dynaform.fluid-dynaform a.inline-field-control i {
+				margin-right: 5px;
+				font-size: 20px;
+}
+
+form.dmsa-dynaform.fluid-dynaform div[data-options-row]:not([class]) {
+				display: block;
+				flex: 1;
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform.fluid-dynaform div[data-options-row]:not([class]) {
+								display: flex;
+								flex-direction: row;
+								flex-wrap: wrap;
+				}
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset {
+				flex: 1;
+				margin: 0 2px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper {
+				padding-top: 0;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="text"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="password"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="number"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="range"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="email"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="tel"],
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper input[type="url"] {
+				box-shadow: inset 0 0 1px #000000;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper .ibutton-container {
+				margin-top: 2px;
+				margin-bottom: 2px;
+				height: 26px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset .input-wrapper .ibutton-container > div {
+				height: 26px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper {
+				min-width: 120px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper > .input-wrapper {
+				margin-top: 7px;
+				padding-bottom: 17px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper input.select2-search__field {
+				width: 100% !important;
+				max-width: 100% !important;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper.short-length {
+				flex: 2 1 120px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper.medium-length {
+				flex: 2 1 200px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.dropdown-wrapper.wide-length {
+				flex: 2 1 350px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.daterange-wrapper {
+				width: auto !important;
+				min-width: 250px;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.toggle-wrapper {
+				display: flex;
+				justify-content: center;
+				position: relative;
+				flex: 0 0 63px;
+				max-width: 63px !important;
+				width: auto !important;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.toggle-wrapper legend {
+				text-align: center;
+}
+
+form.dmsa-dynaform.fluid-dynaform fieldset.toggle-wrapper .input-wrapper div.ibutton-container {
+				margin-top: 6px;
+				margin-bottom: 7px;
+				max-width: 63px !important;
+				width: 63px !important;
+}
+
+form.dmsa-dynaform.liquid-dynaform .input-wrapper {
+				flex: auto;
+}
+
+form.dmsa-dynaform.liquid-dynaform .h5 {
+				font-size: 12px;
+}
+
+form.dmsa-dynaform.liquid-dynaform .checkbox-wrapper {
+				padding-right: 0;
+}
+
+form.dmsa-dynaform.liquid-dynaform legend .legend-interior {
+				display: flex;
+				justify-content: space-between;
+}
+
+form.dmsa-dynaform.liquid-dynaform legend.with-toolbar {
+				position: relative;
+				margin-bottom: 45px;
+}
+
+form.dmsa-dynaform.liquid-dynaform legend.with-toolbar .inline-toolbar {
+				position: absolute;
+}
+
+form.dmsa-dynaform.liquid-dynaform .inline-field-control-wrapper {
+				order: 2;
+				position: relative;
+				height: 20px;
+				top: 20px;
+}
+
+form.dmsa-dynaform.liquid-dynaform a.inline-field-control {
+				font-size: 13px;
+}
+
+form.dmsa-dynaform.liquid-dynaform a.inline-field-control i {
+				margin-right: 5px;
+				font-size: 20px;
+}
+
+form.dmsa-dynaform.liquid-dynaform div[data-options-row]:not([class]) {
+				display: block;
+				flex: 1;
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform.liquid-dynaform div[data-options-row]:not([class]) {
+								display: flex;
+								flex-direction: row;
+								flex-wrap: wrap;
+				}
+}
+
+@media (min-width: 320px) {
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-1 {
+								flex: 0 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-2 {
+								flex: 0 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-3 {
+								flex: 0 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-4 {
+								flex: 0 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-5 {
+								flex: 0 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-6 {
+								flex: 0 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-7 {
+								flex: 0 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-8 {
+								flex: 0 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-9 {
+								flex: 0 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-10 {
+								flex: 0 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-11 {
+								flex: 0 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-0-12 {
+								flex: 0 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-1 {
+								flex: 1 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-2 {
+								flex: 1 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-3 {
+								flex: 1 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-4 {
+								flex: 1 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-5 {
+								flex: 1 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-6 {
+								flex: 1 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-7 {
+								flex: 1 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-8 {
+								flex: 1 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-9 {
+								flex: 1 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-10 {
+								flex: 1 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-11 {
+								flex: 1 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-0-12 {
+								flex: 1 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-1 {
+								flex: 0 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-2 {
+								flex: 0 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-3 {
+								flex: 0 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-4 {
+								flex: 0 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-5 {
+								flex: 0 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-6 {
+								flex: 0 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-7 {
+								flex: 0 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-8 {
+								flex: 0 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-9 {
+								flex: 0 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-10 {
+								flex: 0 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-11 {
+								flex: 0 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-0-1-12 {
+								flex: 0 1 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-1 {
+								flex: 1 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-2 {
+								flex: 1 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-3 {
+								flex: 1 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-4 {
+								flex: 1 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-5 {
+								flex: 1 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-6 {
+								flex: 1 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-7 {
+								flex: 1 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-8 {
+								flex: 1 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-9 {
+								flex: 1 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-10 {
+								flex: 1 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-11 {
+								flex: 1 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .m-1-1-12 {
+								flex: 1 1 100%;
+				}
+}
+
+@media (min-width: 680px) {
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-1 {
+								flex: 0 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-2 {
+								flex: 0 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-3 {
+								flex: 0 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-4 {
+								flex: 0 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-5 {
+								flex: 0 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-6 {
+								flex: 0 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-7 {
+								flex: 0 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-8 {
+								flex: 0 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-9 {
+								flex: 0 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-10 {
+								flex: 0 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-11 {
+								flex: 0 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-0-12 {
+								flex: 0 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-1 {
+								flex: 1 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-2 {
+								flex: 1 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-3 {
+								flex: 1 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-4 {
+								flex: 1 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-5 {
+								flex: 1 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-6 {
+								flex: 1 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-7 {
+								flex: 1 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-8 {
+								flex: 1 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-9 {
+								flex: 1 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-10 {
+								flex: 1 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-11 {
+								flex: 1 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-0-12 {
+								flex: 1 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-1 {
+								flex: 0 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-2 {
+								flex: 0 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-3 {
+								flex: 0 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-4 {
+								flex: 0 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-5 {
+								flex: 0 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-6 {
+								flex: 0 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-7 {
+								flex: 0 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-8 {
+								flex: 0 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-9 {
+								flex: 0 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-10 {
+								flex: 0 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-11 {
+								flex: 0 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-0-1-12 {
+								flex: 0 1 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-1 {
+								flex: 1 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-2 {
+								flex: 1 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-3 {
+								flex: 1 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-4 {
+								flex: 1 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-5 {
+								flex: 1 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-6 {
+								flex: 1 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-7 {
+								flex: 1 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-8 {
+								flex: 1 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-9 {
+								flex: 1 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-10 {
+								flex: 1 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-11 {
+								flex: 1 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .t-1-1-12 {
+								flex: 1 1 100%;
+				}
+}
+
+@media (min-width: 992px) {
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-1 {
+								flex: 0 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-2 {
+								flex: 0 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-3 {
+								flex: 0 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-4 {
+								flex: 0 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-5 {
+								flex: 0 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-6 {
+								flex: 0 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-7 {
+								flex: 0 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-8 {
+								flex: 0 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-9 {
+								flex: 0 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-10 {
+								flex: 0 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-11 {
+								flex: 0 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-0-12 {
+								flex: 0 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-1 {
+								flex: 1 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-2 {
+								flex: 1 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-3 {
+								flex: 1 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-4 {
+								flex: 1 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-5 {
+								flex: 1 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-6 {
+								flex: 1 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-7 {
+								flex: 1 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-8 {
+								flex: 1 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-9 {
+								flex: 1 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-10 {
+								flex: 1 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-11 {
+								flex: 1 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-0-12 {
+								flex: 1 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-1 {
+								flex: 0 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-2 {
+								flex: 0 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-3 {
+								flex: 0 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-4 {
+								flex: 0 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-5 {
+								flex: 0 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-6 {
+								flex: 0 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-7 {
+								flex: 0 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-8 {
+								flex: 0 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-9 {
+								flex: 0 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-10 {
+								flex: 0 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-11 {
+								flex: 0 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-0-1-12 {
+								flex: 0 1 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-1 {
+								flex: 1 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-2 {
+								flex: 1 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-3 {
+								flex: 1 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-4 {
+								flex: 1 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-5 {
+								flex: 1 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-6 {
+								flex: 1 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-7 {
+								flex: 1 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-8 {
+								flex: 1 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-9 {
+								flex: 1 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-10 {
+								flex: 1 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-11 {
+								flex: 1 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .s-1-1-12 {
+								flex: 1 1 100%;
+				}
+}
+
+@media (min-width: 1024px) {
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-1 {
+								flex: 0 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-2 {
+								flex: 0 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-3 {
+								flex: 0 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-4 {
+								flex: 0 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-5 {
+								flex: 0 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-6 {
+								flex: 0 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-7 {
+								flex: 0 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-8 {
+								flex: 0 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-9 {
+								flex: 0 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-10 {
+								flex: 0 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-11 {
+								flex: 0 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-0-12 {
+								flex: 0 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-1 {
+								flex: 1 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-2 {
+								flex: 1 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-3 {
+								flex: 1 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-4 {
+								flex: 1 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-5 {
+								flex: 1 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-6 {
+								flex: 1 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-7 {
+								flex: 1 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-8 {
+								flex: 1 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-9 {
+								flex: 1 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-10 {
+								flex: 1 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-11 {
+								flex: 1 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-0-12 {
+								flex: 1 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-1 {
+								flex: 0 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-2 {
+								flex: 0 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-3 {
+								flex: 0 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-4 {
+								flex: 0 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-5 {
+								flex: 0 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-6 {
+								flex: 0 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-7 {
+								flex: 0 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-8 {
+								flex: 0 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-9 {
+								flex: 0 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-10 {
+								flex: 0 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-11 {
+								flex: 0 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-0-1-12 {
+								flex: 0 1 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-1 {
+								flex: 1 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-2 {
+								flex: 1 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-3 {
+								flex: 1 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-4 {
+								flex: 1 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-5 {
+								flex: 1 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-6 {
+								flex: 1 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-7 {
+								flex: 1 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-8 {
+								flex: 1 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-9 {
+								flex: 1 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-10 {
+								flex: 1 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-11 {
+								flex: 1 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .d-1-1-12 {
+								flex: 1 1 100%;
+				}
+}
+
+@media (min-width: 1180px) {
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-1 {
+								flex: 0 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-2 {
+								flex: 0 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-3 {
+								flex: 0 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-4 {
+								flex: 0 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-5 {
+								flex: 0 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-6 {
+								flex: 0 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-7 {
+								flex: 0 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-8 {
+								flex: 0 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-9 {
+								flex: 0 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-10 {
+								flex: 0 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-11 {
+								flex: 0 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-0-12 {
+								flex: 0 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-1 {
+								flex: 1 0 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-2 {
+								flex: 1 0 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-3 {
+								flex: 1 0 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-4 {
+								flex: 1 0 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-5 {
+								flex: 1 0 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-6 {
+								flex: 1 0 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-7 {
+								flex: 1 0 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-8 {
+								flex: 1 0 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-9 {
+								flex: 1 0 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-10 {
+								flex: 1 0 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-11 {
+								flex: 1 0 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-0-12 {
+								flex: 1 0 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-1 {
+								flex: 0 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-2 {
+								flex: 0 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-3 {
+								flex: 0 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-4 {
+								flex: 0 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-5 {
+								flex: 0 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-6 {
+								flex: 0 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-7 {
+								flex: 0 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-8 {
+								flex: 0 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-9 {
+								flex: 0 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-10 {
+								flex: 0 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-11 {
+								flex: 0 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-0-1-12 {
+								flex: 0 1 100%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-1 {
+								flex: 1 1 8.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-2 {
+								flex: 1 1 16.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-3 {
+								flex: 1 1 25%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-4 {
+								flex: 1 1 33.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-5 {
+								flex: 1 1 41.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-6 {
+								flex: 1 1 50%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-7 {
+								flex: 1 1 58.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-8 {
+								flex: 1 1 66.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-9 {
+								flex: 1 1 75%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-10 {
+								flex: 1 1 83.33333%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-11 {
+								flex: 1 1 91.66667%;
+				}
+				form.dmsa-dynaform.liquid-dynaform .w-1-1-12 {
+								flex: 1 1 100%;
+				}
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset {
+				flex: 1;
+				margin-bottom: 0;
+				padding: 0 2px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper {
+				padding-top: 0;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="text"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="password"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="number"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="range"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="email"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="tel"],
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper input[type="url"] {
+				box-shadow: inset 0 0 1px #000000;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper .ibutton-container {
+				margin-top: 2px;
+				margin-bottom: 2px;
+				height: 26px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper .ibutton-container > div {
+				height: 26px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper.checkbox-group > ul {
+				column-count: 8;
+				list-style-type: none;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper.checkbox-group > ul li {
+				padding-right: 2px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset .input-wrapper .checkbox-wrapper {
+				white-space: nowrap;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper {
+				min-width: 120px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper > .input-wrapper {
+				margin-top: 7px;
+				padding-bottom: 17px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper input.select2-search__field {
+				width: 100% !important;
+				max-width: 100% !important;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper.short-length {
+				flex: 2 1 120px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper.medium-length {
+				flex: 2 1 200px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.dropdown-wrapper.wide-length {
+				flex: 2 1 350px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.daterange-wrapper {
+				width: auto !important;
+				min-width: 250px;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.toggle-wrapper {
+				display: flex;
+				justify-content: center;
+				position: relative;
+				flex: 0 0 63px;
+				max-width: 63px !important;
+				width: auto !important;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.toggle-wrapper legend {
+				text-align: center;
+}
+
+form.dmsa-dynaform.liquid-dynaform fieldset.toggle-wrapper .input-wrapper div.ibutton-container {
+				margin-top: 6px;
+				margin-bottom: 7px;
+				max-width: 63px !important;
+				width: 63px !important;
+}
+
+@keyframes pulse-blink {
+				0% {
+								opacity: 1;
+				}
+				50% {
+								opacity: 0;
+				}
+				100% {
+								opacity: 1;
+				}
+}
+
+#reporting-wrapper li.select2-results__message {
+				display: none !important;
+}
+
+#reporting-wrapper div.dataTables_wrapper {
+				overflow: scroll;
+}
+
+#reporting-wrapper table.dataTable thead tr th {
+				line-height: 1.5 !important;
+				padding-top: 4px;
+				padding-bottom: 4px;
+}
+
+#reporting-wrapper table.dataTable tfoot td {
+				font-weight: 600;
+				color: #666666;
+}
+
+#reporting-wrapper table.dataTable tbody tr td.divider-row {
+				font-weight: 600;
+				text-decoration: underline;
+}
+
+#reporting-wrapper div.report-selector-wrapper {
+				align-items: flex-start;
+}
+
+#datasource-form a.accordion-toggle {
+				display: flex;
+				justify-content: flex-start;
+}
+
+#datasource-form a.accordion-toggle span {
+				display: inline-block;
+}
+
+#datasource-form a.accordion-toggle .proper-title {
+				opacity: 0;
+				order: 2;
+}
+
+#datasource-form a.accordion-toggle .proper-title + .default-title {
+				opacity: 1;
+				order: 1;
+}
+
+#datasource-form.collapsed a.accordion-toggle .proper-title {
+				opacity: 1;
+				order: 1;
+}
+
+#datasource-form.collapsed a.accordion-toggle .proper-title + .default-title {
+				opacity: 0;
+				order: 2;
+}
+
+#report-selector-pane {
+				display: flex;
+				flex-direction: column;
+				align-self: stretch;
+				order: 2;
+}
+
+@media (min-width: 680px) {
+				#report-selector-pane {
+								order: 1;
+				}
+}
+
+#report-selector-pane div.checking-indicator {
+				opacity: 0;
+				justify-content: center;
+				align-items: center;
+				flex: 1 0 auto;
+				padding: 10px 0;
+}
+
+#report-selector-pane div.checking-indicator.active {
+				animation: pulse-blink normal 0.75s infinite ease-in-out both;
+}
+
+#report-info-pane {
+				order: 1;
+}
+
+@media (min-width: 680px) {
+				#report-info-pane {
+								order: 2;
+								padding-left: 20px;
+				}
+}
+
+#report-info-pane .report-title {
+				text-align: center;
+				font-size: 32px;
+				line-height: 30px;
+}
+
+@media (min-width: 680px) {
+				#report-info-pane .report-title {
+								text-align: left;
+				}
+}
+
+#report-info-pane .report-description ul {
+				list-style: none;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				position: relative;
+				padding-left: 75px;
+}
+
+#report-info-pane .report-description ul:not(:empty)::before {
+				content: attr(data-label) ": ";
+				position: absolute;
+				top: 0;
+				left: 0;
+				text-transform: uppercase;
+}
+
+#report-info-pane .report-description ul li {
+				margin-right: 10px;
+}
+
+#report-info-pane .report-description ul li.badge {
+				font-size: 12px;
+				height: 16px;
+				margin-bottom: 8px;
+				padding: 0 6px;
+}
+
+#report-info-pane .report-heading {
+				opacity: 0.7;
+				font-size: 14px;
+				font-weight: normal;
+				margin-bottom: 20px;
+				border-bottom: solid #c8c8c8 1px;
+				text-align: center;
+}
+
+@media (min-width: 680px) {
+				#report-info-pane .report-heading {
+								text-align: left;
+				}
+}
+
+#report-info-pane .report-heading:empty {
+				display: none;
+}
+
+#report-info-pane .report-keywords:empty {
+				display: none;
+}
+
+#report-info-pane .report-metrics:empty {
+				display: none;
+}
+
+#report-info-pane .report-requires {
+				list-style-position: inside;
+				list-style-type: none;
+				position: relative;
+}
+
+#report-info-pane .report-requires:not(:empty)::before {
+				content: "Requires:";
+				position: absolute;
+				top: 0;
+				left: 0;
+				text-transform: uppercase;
+}
+
+#report-info-pane .report-requires li {
+				padding-left: 75px;
+				color: gray;
+}
+
+#report-info-pane .report-requires li::before {
+				font-family: FontAwesome;
+				color: gray;
+				font-size: 16px;
+				content: "\f096";
+				margin-right: 5px;
+}
+
+#report-info-pane .report-requires li.check-passed::before {
+				content: "\f046";
+}
+
+#report-info-pane .report-requires li.check-failed::before {
+				content: "\f06a";
+}
+
+#workbook-tabs ul.nav-tabs li {
+				transition: all 0.5s ease-in-out;
+}
+
+#workbook-tabs ul.nav-tabs li.dropping {
+				margin-right: -10%;
+				opacity: 0;
+}
+
+#workbook-tabs ul.nav-tabs a button.close {
+				width: 20px;
+				height: 20px;
+				font-size: 14px;
+				font-weight: 600;
+				color: rgba(0, 0, 0, 0.5);
+				box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.5);
+				transition: all 0.2s ease-in-out;
+				background-color: white;
+				border-radius: 50%;
+				opacity: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: -10px;
+				right: -10px;
+}
+
+#workbook-tabs ul.nav-tabs a:hover button.close {
+				transition: all 0.2s ease-in-out;
+				opacity: 1;
+}
+
+#workbook-content .tab-pane {
+				transition: all 0.5s linear;
+}
+
+#workbook-content .tab-pane.dropping {
+				opacity: 0;
+				overflow: hidden;
+}
+
+#workbook-content .tab-pane.dropping > div {
+				transform: translateX(1000px);
+}
+
+#workbook-content .tab-pane.dropping > div:nth-child(1n+0) {
+				transform: translateX(-1000px);
+}
+
+#workbook-content .entity-wrapper {
+				transition: all 1s ease-in-out;
+				position: relative;
+}
+
+#workbook-content .entity-wrapper.box {
+				border-top-style: none;
+}
+
+#workbook-content .entity-wrapper > button.close {
+				width: 20px;
+				height: 20px;
+				font-size: 14px;
+				font-weight: 600;
+				color: rgba(0, 0, 0, 0.5);
+				transition: all 0.2s ease-in-out;
+				border-radius: 50%;
+				opacity: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: 5px;
+				right: 5px;
+}
+
+#workbook-content .entity-wrapper > button.close:hover {
+				box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.5);
+}
+
+#datasource-options button.btn.start-over-btn {
+				overflow: hidden;
+				opacity: 1;
+				margin-left: 3px;
+				max-width: 150px;
+				transition: all 0.25s ease-in-out;
+}
+
+#datasource-options.collapsed button.btn.start-over-btn {
+				border: none;
+				max-width: 0;
+				padding: 0;
+				opacity: 0;
+}
+
+#edit-type-pane #edit-type-form button {
+				display: block;
+				width: 100%;
+}
+
+@media (min-width: 680px) {
+				#edit-type-pane #edit-type-form button {
+								width: auto;
+								flex: 0 0 50%;
+				}
+}
+
+form > .box-header {
+				display: flex;
+				flex-direction: row;
+}
+
+form > .box-header .status-wrapper {
+				display: flex;
+				flex-direction: row-reverse;
+				flex: auto;
+				float: right;
+				text-align: right;
+				padding-right: 20px;
+}
+
+form > .box-header .status-wrapper i {
+				opacity: 0;
+				transition: all 0.5s ease-in-out;
+}
+
+form > .box-header .status-wrapper span {
+				margin-left: 5px;
+				white-space: nowrap;
+				transition: all 0.5s ease-in-out;
+}
+
+form > .box-header .status-wrapper span:empty {
+				opacity: 0;
+}
+
+form > .box-header .status-wrapper span:not(:empty) + i {
+				opacity: 1;
+}

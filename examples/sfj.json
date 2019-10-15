@@ -1,0 +1,1773 @@
+{
+ "description":{
+  "heading":"Monthly Partner Websites Reports",
+  "metrics":[
+   "Visitors",
+   "Prayers",
+   "Form Fills",
+   "Calculated Totals"
+  ],
+  "keywords":[
+   "Monthly",
+   "YTD",
+   "Cumulative",
+   "Multi-Spreadsheet",
+   "Partner",
+   "Internet Evangelism",
+   "SearchForJesus",
+   "PeaceWithGod",
+   "Decisions",
+   "Breakdowns"
+  ]
+ },
+ "methods":{
+  "pull_partner_totals":{
+   "args":[
+    "$user_website_ids"
+   ],
+   "function":[
+    "$user_website_ids_joined = implode(',',$user_website_ids);",
+    "$where = \"website_id IN({$user_website_ids_joined}) AND type IN(0,1,2,4,6,7)\";",
+    "$sql = \"SELECT website_id, ELT((A.type+1),'first_time','rededications','questions','contact','visits','church_search','form_fills','prayers') AS metric, A.may_ytd, A.may_cml FROM partner_totals A WHERE {$where} ORDER BY website_id ASC\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$results = $query->num_rows() ? $query->result() : [];",
+    "$output = array_fill_keys($user_website_ids,null);",
+    "foreach($results as $row){",
+    "$website_id = $row->website_id;",
+    "if(!array_key_exists($website_id,$output)){ $output[$website_id] = []; }",
+    "$output[$website_id][\"pytd_{$row->metric}\"] = $row->may_ytd;",
+    "$output[$website_id][\"pcum_{$row->metric}\"] = $row->may_cml;",
+    "}",
+    "return $output;"
+   ]
+  },
+  "precalc_data_exists":{
+   "args":[
+
+   ],
+   "function":"return $this->__fw->db->table_exists('reports_table_td');"
+  },
+  "build_data_template":{
+   "args":[
+
+   ],
+   "function":"return array_fill_keys(explode(',','name,url,country_short,country_full,visits,prayers,form_fills,first_time,rededications,questions,ytd_visits,ytd_prayers,ytd_form_fills,ytd_first_time,ytd_rededications,ytd_questions,cum_visits,cum_prayers,cum_form_fills,cum_first_time,cum_rededications,cum_questions,response_rate,ytd_response_rate,cum_response_rate,visits_form_fill_rate,prayers_form_fill_rate,ytd_visits_form_fill_rate,ytd_prayers_form_fill_rate,cum_visits_form_fill_rate,cum_prayers_form_fill_rate,cum_first_time_rate,cum_rededications_rate,cum_questions_rate,is_precalced,is_partner'),null);"
+  },
+  "build_data_container":{
+   "args":[
+    "$user_website_ids"
+   ],
+   "function":[
+    "$output = new stdClass;",
+    "foreach($user_website_ids as $website_id){",
+    "$output->{$website_id} = (object)($this->build_data_template());",
+    "}",
+    "return $output;"
+   ]
+  },
+  "apply_metrics":{
+   "args":[
+    "$container",
+    "$data"
+   ],
+   "function":[
+    "foreach($data as $key => $value){",
+    "if(property_exists($container,$key)){ $container->$key = $value; }",
+    "}",
+    "return $container;"
+   ]
+  },
+  "apply_partner_totals":{
+   "args":[
+    "$destination",
+    "$source",
+    "$year"
+   ],
+   "function":[
+    "$keys = ['visits','prayers','first_time','rededications','questions','form_fills'];",
+    "foreach($keys as $key){",
+    "list($cum_dst,$ytd_dst)=[\"cum_{$key}\",\"ytd_{$key}\"];",
+    "list($cum_src,$ytd_src)=[\"p{$cum_dst}\",\"p{$ytd_dst}\"];",
+    "if(array_key_exists($cum_src,$source) && !is_null($source[$cum_src])){ $destination->$cum_dst = $destination->$cum_dst + $source[$cum_src]; }",
+    "if($year==2016 && array_key_exists($ytd_src,$source) && !is_null($source[$ytd_src])){ $destination->$ytd_dst = $destination->$ytd_dst + $source[$ytd_src]; }",
+    "}"
+   ]
+  },
+  "pull_and_apply_cum_visits":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$sql = \"SELECT website_id, COUNT(1) AS cum_visits FROM piwik_unique_cumulative WHERE website_id IN({$website_ids_joined}) {$f}AND first_datestamp <= LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->cum_visits = $row->cum_visits; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_and_apply_cum_prayers":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$sql = \"SELECT website_id, COUNT(1) AS cum_prayers FROM piwik_unique_cumulative WHERE prayer=1 AND website_id IN({$website_ids_joined}) {$f}AND first_datestamp <= LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->cum_prayers = $row->cum_prayers; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_and_apply_ytd_visits":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$year = date('Y',strtotime($monthstamp)); $firstOfYear = \"{$year}-01-01\";",
+    "$sql = \"SELECT website_id, COUNT(DISTINCT visitor_uuid) AS ytd_visits FROM piwik_unique_visits WHERE website_id IN({$website_ids_joined}) {$f}AND datestamp BETWEEN '{$firstOfYear}' AND LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->ytd_visits = $row->ytd_visits; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_and_apply_ytd_prayers":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$year = date('Y',strtotime($monthstamp)); $firstOfYear = \"{$year}-01-01\";",
+    "$sql = \"SELECT website_id, COUNT(DISTINCT visitor_uuid) AS ytd_prayers FROM piwik_unique_visits WHERE prayer=1 AND website_id IN({$website_ids_joined}) {$f}AND datestamp BETWEEN '{$firstOfYear}' AND LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->ytd_prayers = $row->ytd_prayers; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_and_apply_mtd_visits":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$sql = \"SELECT website_id, COUNT(DISTINCT visitor_uuid) AS visits FROM piwik_unique_visits WHERE website_id IN({$website_ids_joined}) {$f}AND datestamp BETWEEN '{$monthstamp}' AND LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->visits = $row->visits; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_and_apply_mtd_prayers":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$filter"
+   ],
+   "function":[
+    "$website_ids_joined=implode(',',$website_ids);",
+    "$f = $filter ? ' AND filtered=0 ' : '';",
+    "$start = time();",
+    "$sql = \"SELECT website_id, COUNT(DISTINCT visitor_uuid) AS prayers FROM piwik_unique_visits WHERE prayer=1 AND website_id IN({$website_ids_joined}) {$f}AND datestamp BETWEEN '{$monthstamp}' AND LAST_DAY('{$monthstamp}') GROUP BY website_id\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$result = $query->result();",
+    "$end = time();",
+    "foreach($result as $i => $row){ $subcon = $container->{$row->website_id}; $subcon->prayers = $row->prayers; }",
+    "$time = $end - $start; return compact('sql','time');"
+   ]
+  },
+  "pull_precalc_data":{
+   "args":[
+    "$monthstamp",
+    "$filter_ip",
+    "$user_website_ids"
+   ],
+   "function":[
+    "if(!$this->__fw->db->table_exists('reports_table_td')){ return false; };",
+    "$f = $filter_ip ? 1 : 0;",
+    "$sites = implode(',',$user_website_ids);",
+    "$sql = \"SELECT DISTINCT website_id, datestamp, form_fills, first_time, rededications, questions, visitsMTD AS visits, prayersMTD AS prayers, form_fillsMTD AS mtd_form_fills, first_timeMTD AS mtd_first_time, rededicationsMTD AS mtd_rededications, questionsMTD AS mtd_questions, visitsYTD AS ytd_visits, prayersYTD AS ytd_prayers, form_fillsYTD AS ytd_form_fills, first_timeYTD AS ytd_first_time, rededicationsYTD AS ytd_rededications, questionsYTD AS ytd_questions, visitsC AS cum_visits, prayersC AS cum_prayers, form_fillsC AS cum_form_fills, first_timeC AS cum_first_time, rededicationsC AS cum_rededications, questionsC AS cum_questions FROM reports_table_td WHERE datestamp=LAST_DAY('{$monthstamp}') AND filtered={$f} AND website_id IN({$sites}) ORDER BY website_id ASC\";",
+    "$query = $this->__fw->db->query($sql);",
+    "$data = $query->result_array();",
+    "$query->free_result();",
+    "$output=[];",
+    "foreach($data as $i => $row){ $output[$row['website_id']] = $row; };",
+    "return $output;"
+   ]
+  },
+  "pull_and_calculate":{
+   "args":[
+    "$container",
+    "$monthstamp",
+    "$website_ids",
+    "$partner_totals=null",
+    "$filter=false"
+   ],
+   "function":[
+    "$timestamp = strtotime($monthstamp);",
+    "$year = (int)(date('Y',$timestamp));",
+    "$month = (int)(date('m',$timestamp));",
+    "$pre_cutoff = $year < 2016 ? true : ($year > 2016 ? false : $month <= 5);",
+    "ignore_user_abort(false);",
+    "$stats['cum_visits'] = $this->pull_and_apply_cum_visits($container,$monthstamp,$website_ids,$filter);",
+    "$stats['cum_prayers'] = $this->pull_and_apply_cum_prayers($container,$monthstamp,$website_ids,$filter);",
+    "$stats['ytd_visits'] = $this->pull_and_apply_ytd_visits($container,$monthstamp,$website_ids,$filter);",
+    "$stats['ytd_prayers'] = $this->pull_and_apply_ytd_prayers($container,$monthstamp,$website_ids,$filter);",
+    "$stats['visits'] = $this->pull_and_apply_mtd_visits($container,$monthstamp,$website_ids,$filter);",
+    "$stats['prayers'] = $this->pull_and_apply_mtd_prayers($container,$monthstamp,$website_ids,$filter);",
+    "if(!$pre_cutoff){",
+    "foreach($partner_totals as $website_id => $totals){",
+    "if(!is_null($totals) && is_array($totals)){ $this->apply_partner_totals( $container->{$website_id}, $totals, $year ); }",
+    "}",
+    "}",
+    "return $stats;"
+   ]
+  },
+  "nulls_to_zeroes":{
+   "args":[
+    "$container"
+   ],
+   "function":[
+    "$websites = array_keys((array)$container);",
+    "foreach($websites as $website_id){",
+    "$keys = array_keys((array)$container->{$website_id});",
+    "foreach($keys as $key){",
+    "if(is_null($container->{$website_id}->$key)){",
+    "$container->{$website_id}->$key = 0;",
+    "}",
+    "}",
+    "}"
+   ]
+  },
+  "fill_calculated_dataset":{
+   "args":[
+    "$container"
+   ],
+   "function":[
+    "$websites = array_keys((array)$container);",
+    "foreach($websites as $website_id){",
+    "$this->fill_calculated_data($container->{$website_id});",
+    "}"
+   ]
+  },
+  "fill_calculated_data":{
+   "args":[
+    "$row"
+   ],
+   "function":[
+    "if(is_null($row->response_rate)){ $row->response_rate = $row->visits > 0 ? $row->prayers / $row->visits : 0; }",
+    "if(is_null($row->ytd_response_rate)){ $row->ytd_response_rate = $row->ytd_visits > 0 ? $row->ytd_prayers / $row->ytd_visits : 0; }",
+    "if(is_null($row->cum_response_rate)){ $row->cum_response_rate = $row->cum_visits > 0 ? $row->cum_prayers / $row->cum_visits : 0; }",
+    "if(is_null($row->visits_form_fill_rate)){ $row->visits_form_fill_rate = $row->visits > 0 ? $row->form_fills / $row->visits : 0; }",
+    "if(is_null($row->prayers_form_fill_rate)){ $row->prayers_form_fill_rate = $row->prayers > 0 ? $row->form_fills / $row->prayers : 0; }",
+    "if(is_null($row->ytd_visits_form_fill_rate)){ $row->ytd_visits_form_fill_rate = $row->ytd_visits > 0 ? $row->ytd_form_fills / $row->ytd_visits : 0; }",
+    "if(is_null($row->ytd_prayers_form_fill_rate)){ $row->ytd_prayers_form_fill_rate = $row->ytd_prayers > 0 ? $row->ytd_form_fills / $row->ytd_prayers : 0; }",
+    "if(is_null($row->cum_visits_form_fill_rate)){ $row->cum_visits_form_fill_rate = $row->cum_visits > 0 ? $row->cum_form_fills / $row->cum_visits : 0; }",
+    "if(is_null($row->cum_prayers_form_fill_rate)){ $row->cum_prayers_form_fill_rate = $row->cum_prayers > 0 ? $row->cum_form_fills / $row->cum_prayers : 0; }",
+    "if(is_null($row->cum_first_time_rate)){ $row->cum_first_time_rate = $row->cum_form_fills > 0 ? $row->cum_first_time / $row->cum_form_fills : 0; }",
+    "if(is_null($row->cum_rededications_rate)){ $row->cum_rededications_rate = $row->cum_form_fills > 0 ? $row->cum_rededications / $row->cum_form_fills : 0; }",
+    "if(is_null($row->cum_questions_rate)){ $row->cum_questions_rate = $row->cum_form_fills > 0 ? $row->cum_questions / $row->cum_form_fills : 0; }"
+   ]
+  },
+  "assemble_datasets":{
+   "args":[
+    "$user_website_ids",
+    "$main_data",
+    "$partner_totals",
+    "$precalc_data",
+    "$monthstamp",
+    "$filter_ip"
+   ],
+   "function":[
+    "$no_precalc_exists = [];",
+    "$datasets = $this->build_data_container( $user_website_ids );",
+    "foreach($precalc_data as $website_id => $data){",
+    "$datasets->{$website_id}->is_partner = false;",
+    "if(is_null($data)){ $datasets->{$website_id}->is_precalced = false; $no_precalc_exists[] = $website_id; }",
+    "else{",
+    "$datasets->{$website_id}->is_precalced = true;",
+    "$this->apply_metrics( $datasets->{$website_id}, $data );",
+    "}",
+    "}",
+    "foreach($partner_totals as $website_id => $data){",
+    "$datasets->{$website_id}->is_partner = true;",
+    "}",
+    "if(!empty($no_precalc_exists)){",
+    "$statistics = $this->pull_and_calculate( $datasets, $monthstamp, $no_precalc_exists, $partner_totals, $filter_ip );",
+    "}",
+    "foreach($main_data as $row){",
+    "$this->apply_metrics( $datasets->{$row['website_id']}, $row );",
+    "}",
+    "$this->fill_calculated_dataset( $datasets );",
+    "$this->nulls_to_zeroes( $datasets );",
+    "return compact('datasets','statistics');"
+   ]
+  },
+  "apply_calced_data":{
+   "args":[
+    "$container",
+    "$calced_website_ids",
+    "$partner_totals",
+    "$monthstamp"
+   ],
+   "function":[
+    "$timestamp = strtotime($monthstamp);",
+    "$year = (int)(date('Y',$timestamp));",
+    "$month = (int)(date('m',$timestamp));",
+    "$pre_cutoff = $year < 2016 ? true : ($year > 2016 ? false : $month < 5);",
+    "if(!$pre_cutoff){",
+    "foreach($calced_website_ids as $i => $website_id){",
+    "if(array_key_exists($website_id,$partner_totals)){",
+    "if(!is_null($partner_totals->{$website_id}) && is_array($partner_totals->{$website_id})){",
+    "$this->apply_partner_totals( $container->{$website_id}, $partner_totals->{$website_id}, $year );",
+    "}",
+    "}",
+    "}",
+    "}"
+   ]
+  },
+  "flatten_assembled_data":{
+   "args":[
+    "$input"
+   ],
+   "function":[
+    "$output = [];",
+    "foreach($input as $website_id => $dataset){",
+    "$row = (array)$dataset;",
+    "$row['website_id']=$website_id;",
+    "$output[] = $row;",
+    "}",
+    "return $output;"
+   ]
+  }
+ },
+ "properties":{
+  "user_id":{
+   "type":"int",
+   "accessor":"ci",
+   "path":"session/userdata/user_id",
+   "cached":true
+  },
+  "user_websites":{
+   "type":"array",
+   "accessor":"db",
+   "dependencies":[
+    "user_id"
+   ],
+   "query":"SELECT A.website_id AS value, B.name AS title FROM qry_user_website_assignments A LEFT JOIN websites B ON (A.website_id=B.website_id) WHERE user_id = {$user_id} AND published=1 AND is_dev=0 AND is_widget=0 AND is_touch=0 AND is_mobile=0 AND B.ministry_id IS NOT NULL AND B.ministry_id > 0 AND B.ministry_id != 7 ORDER BY name ASC",
+   "cached":true
+  },
+  "user_website_ids":{
+   "type":"array",
+   "accessor":"ui",
+   "parameter":"user_website_ids",
+   "dependencies":[
+    "user_websites"
+   ],
+   "default":{
+    "accessor":"fn",
+    "function":"$tmp = array(); foreach($report->user_websites as $row){ $tmp[]=$row['value']; } return $tmp;"
+   },
+   "cached":true
+  },
+  "user_website_ids_joined":{
+   "type":"string",
+   "accessor":"fn",
+   "dependencies":[
+    "user_website_ids"
+   ],
+   "function":"return implode(',',$report->user_website_ids);",
+   "cached":true
+  },
+  "monthstamp":{
+   "type":"string",
+   "accessor":"ui",
+   "parameter":"monthstamp",
+   "cached":true,
+   "default":{
+    "accessor":"fn",
+    "function":"return date('Y-m-01');"
+   }
+  },
+  "month_title":{
+   "type":"string",
+   "dependencies":[
+    "monthstamp"
+   ],
+   "accessor":"fn",
+   "function":"return date('M Y',strtotime($report->monthstamp));",
+   "cached":true
+  },
+  "month_slashed":{
+   "type":"string",
+   "accessor":"fn",
+   "dependencies":[
+    "monthstamp"
+   ],
+   "function":"return date('n/j/y',strtotime($report->monthstamp));"
+  },
+  "filter_ip":{
+   "type":"boolean",
+   "accessor":"ui",
+   "parameter":"filter_ip",
+   "cached":true,
+   "default":true
+  },
+  "types":{
+   "type":"array",
+   "accessor":"fn",
+   "cached":true,
+   "function":[
+    "return [",
+    "'first_time' => 0,",
+    "'renewal' => 1,",
+    "'question' => 2,",
+    "'contact' => 3,",
+    "'visit' => 4,",
+    "'church_search' => 5,",
+    "'form_fill' => 6,",
+    "'prayer' => 7",
+    "];"
+   ]
+  },
+  "query_object":{
+   "type":"string",
+   "accessor":"fn",
+   "dependencies":[
+    "filter_ip",
+    "user_website_ids",
+    "monthstamp"
+   ],
+   "function":[
+    "$specs['website_ids'] = $user_website_ids;",
+    "$specs['filtered'] = $filter_ip ? 1 : 0;",
+    "$specs['datestamp'] = \"(SELECT MAX(datestamp) FROM reports_table_td WHERE monthstamp='{$monthstamp}')\";",
+    "$specs['columns'] = [",
+    "'website_id',",
+    "'name',",
+    "'url',",
+    "'country_short',",
+    "'country_full',",
+    "'mtd_visits',",
+    "'ytd_visits',",
+    "'cum_visits',",
+    "'mtd_prayers',",
+    "'ytd_prayers',",
+    "'cum_prayers',",
+    "'mtd_form_fills',",
+    "'ytd_form_fills',",
+    "'cum_form_fills',",
+    "'mtd_first_time',",
+    "'ytd_first_time',",
+    "'cum_first_time',",
+    "'mtd_rededications',",
+    "'ytd_rededications',",
+    "'cum_rededications',",
+    "'mtd_questions',",
+    "'ytd_questions',",
+    "'cum_questions',",
+    "'mtd_response_rate',",
+    "'ytd_response_rate',",
+    "'cum_response_rate',",
+    "'mtd_visits_form_fill_rate',",
+    "'ytd_visits_form_fill_rate',",
+    "'cum_visits_form_fill_rate',",
+    "'mtd_prayers_form_fill_rate',",
+    "'ytd_prayers_form_fill_rate',",
+    "'cum_prayers_form_fill_rate',",
+    "'cum_first_time_rate',",
+    "'cum_rededications_rate',",
+    "'cum_questions_rate'",
+    "];",
+    "$query_object = new DMSA_Cumulative_Query($specs);",
+    "return $query_object"
+   ],
+   "cached":true
+  },
+  "dataset":{
+   "type":"array",
+   "accessor":"fn",
+   "dependencies":[
+    "query_object"
+   ],
+   "function":	"return $query_object('array','array');",
+   "cached":true
+  },
+	  "totals":	{
+		  "type":	"array",
+		  "accessor": "fn",
+		  "dependencies": ["dataset","query_object"],
+		  "function":	"return $query_object->get_totals_array();"
+	  },
+  "file_name":{
+   "type":"string",
+   "parameter":"file_name",
+   "accessor":"ui",
+   "cached":true,
+   "default":{
+    "accessor":"fn",
+    "function":"return 'SFJ Website Stats '.str_replace(' ','-',$report->month_title).'.xlsx';"
+   }
+  }
+ },
+ "requires":{
+  "SFJ Websites (1 or more)":{
+   "dependencies":[
+    "user_websites"
+   ],
+   "accessor":"fn",
+   "function":"return sizeof($user_websites) > 0;",
+   "failure":"Sorry, this report requires access one or more SFJ websites."
+  }
+ },
+ "ui":{
+  "dependencies":[
+   "user_websites",
+   "user_website_ids",
+   "monthstamp",
+   "file_name",
+   "filter_ip"
+  ],
+  "functions":{
+   "drop_spreadsheet":{
+    "args":[
+     "sheet_id"
+    ],
+    "body":"console.log('drop_spreadsheet',{sheet_id:sheet_id});"
+   },
+   "drop_spreadsheet_btn_click":{
+    "args":[
+     "e"
+    ],
+    "body":[
+     "e.preventDefault();",
+     "var target = $(e.target).closest('button[data-website-id]'),",
+     "website_id = target.attr('data-website-id'),",
+     "sheet_id = target.closest('[data-sheet-id]').attr('data-sheet-id');",
+     "window.DMSA.current_module.datasource_options.fields.user_website_ids.deselect( website_id );",
+     "window.DMSA.current_module.workbook.drop_spreadsheet( sheet_id );"
+    ]
+   }
+  },
+  "components":{
+   "month_select":{
+    "label":"Select Month",
+    "type":"datepicker",
+    "parameter":"monthstamp",
+    "value":"{$monthstamp}",
+    "options":{
+     "autoclose":true,
+     "startDate":"2016-05-01",
+     "startView":"months",
+     "format":"MM yyyy",
+     "minViewMode":"months",
+     "maxViewMode":"years",
+     "endDate":"0d"
+    }
+   },
+   "filter_ip":{
+    "label":"IP Filter",
+    "type":"toggle",
+    "parameter":"filter_ip",
+    "value":{
+     "accessor":"fn",
+     "function":"return $report->filter_ip;"
+    }
+   },
+   "websites_select":{
+    "label":"Choose Websites",
+    "type":"checkboxes",
+    "parameter":"user_website_ids",
+    "options":{
+     "source":"user_websites",
+     "value_key":"value",
+     "label_key":"title",
+     "preselect":true
+    },
+    "validate":{
+     "not_empty":"Please select at least 1 website."
+    }
+   },
+   "filename_input":{
+    "parameter":"file_name",
+    "label":"Excel Filename",
+    "type":"text",
+    "validate":[
+     "not_empty",
+     "valid_filename"
+    ],
+    "value":"{$file_name}"
+   }
+  },
+  "layout":[
+   [
+    [
+     "filter_ip",
+     "month_select"
+    ],
+    "filename_input"
+   ],
+   "websites_select"
+  ]
+ },
+ "workbook":{
+  "dependencies":[
+   "monthstamp",
+   "month_title",
+   "user_websites",
+   "user_website_ids",
+   "dataset",
+		 "totals",
+   "file_name"
+  ],
+  "spreadsheets":[
+   {
+    "id":"pivot",
+    "type":"static",
+    "title":"Website stats All SFJ",
+    "contents":[
+     {
+      "object":"table",
+      "type":"basic",
+      "title":"SFJ Core Websites Key Stats",
+      "datasource":"dataset",
+      "totals":true,
+      "styles":{
+       "title":{
+        "alignment":{
+         "horizontal":"center"
+        },
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        }
+       },
+       "heading":{
+        "alignment":{
+         "horizontal":"center",
+         "wrap":true
+        },
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        },
+        "font":{
+         "bold":true
+        }
+       },
+       "data, footer":{
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        }
+       },
+       "website_name (data,footer,label,heading)":{
+        "alignment":{
+         "horizontal":"left"
+        }
+       },
+       "footer":{
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        },
+        "font":{
+         "bold":true
+        }
+       }
+      },
+      "columns":{
+       "website_name":{
+        "header":"SFJ Core Websites Key Stats Month/YTD",
+        "getters":{
+         "value":{
+          "accessor":"fn",
+          "function":"return $row['url'].' '.strtoupper($row['country_short']);"
+         }
+        },
+        "footer":"Grand Total"
+       },
+       "total_visitors":{
+        "header":"Total Visitors",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_visits",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_visits",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         }
+        }
+       },
+       "total_indicated_decisions":{
+        "header":"Total Indicated Decisions",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_prayers",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_prayers",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         }
+        }
+       },
+       "total_forms_filled":{
+        "header":"Total Forms Filled",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_form_fills",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_form_fills",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         }
+        }
+       },
+       "total_response_rate":{
+        "header":"Total Response Rate*",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_response_rate",
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "footer":{
+									"accessor":	"fn",
+									"type":		"decimal",
+            "format":	"percentify",
+									"function":	[
+										"return $totals['mtd_response_rate'];"
+									]
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_response_rate",
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "footer":{
+									"accessor":	"fn",
+									"type":		"decimal",
+									"format":	"percentify",
+									"function":	[
+										"return $totals['ytd_response_rate'];"
+									]
+           }
+          }
+         }
+        }
+       },
+       "total_first_time":{
+        "header":"First Time",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_first_time",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_first_time",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         }
+        }
+       },
+       "total_rededication":{
+        "header":"Rededication",
+        "subcolumns":{
+         "month":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title;"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"mtd_rededications",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         "ytd":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return $report->month_title.' '.'YTD';"
+           },
+           "value":{
+            "accessor":"row",
+            "key":"ytd_rededications",
+            "type":"integer",
+            "format":"commafy"
+           },
+           "footer":{
+            "accessor":"column",
+            "method":"sum",
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     {
+      "object":"table",
+      "type":"basic",
+      "title":"SFJ Core Websites Key Stats Cumulative",
+      "datasource":"dataset",
+      "totals":true,
+      "styles":{
+       "title":{
+        "alignment":{
+         "horizontal":"center"
+        },
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        }
+       },
+       "superheading":{
+        "alignment":{
+         "horizontal":"left"
+        },
+        "font":{
+         "bold":true
+        }
+       },
+       "heading":{
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        },
+        "font":{
+         "bold":true
+        }
+       },
+       "subheading":{
+        "alignment":{
+         "horizontal":"center"
+        },
+        "font":{
+         "bold":true
+        }
+       },
+       "subheading cml.website_name":{
+        "alignment":{
+         "wrap":true,
+         "horizontal":"left"
+        }
+       },
+       "data":{
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        }
+       },
+       "footer":{
+        "borders":{
+         "outline":{
+          "style":"thin"
+         }
+        },
+        "font":{
+         "bold":true
+        }
+       }
+      },
+      "columns":{
+       "cml":{
+        "header":{
+         "accessor":"fn",
+         "function":"return $report->month_title.' '.'CML';"
+        },
+        "subcolumns":{
+         "website_name":{
+          "header":"SFJ Core Websites Key Stats Cumulative",
+          "getters":{
+           "value":{
+            "accessor":"fn",
+            "function":"return $row['url'].' '.strtoupper($row['country_short']);"
+           }
+          },
+          "footer":"Grand Total"
+         }
+        }
+       },
+       "total_visitors":{
+        "header":"Total Visitors",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_visits",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       },
+       "total_indicated_decisions":{
+        "header":"Total Indicated Decisions",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_prayers",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       },
+       "total_forms_filled":{
+        "header":"Total Forms Filled",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_form_fills",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       },
+       "total_response_rate":{
+        "header":"Total Response Rate*",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_response_rate",
+          "type":"decimal",
+          "format":"percentify"
+         },
+         "footer":{
+								"accessor":	"fn",
+								"type":		"decimal",
+								"format":	"percentify",
+								"function":	[
+									"return $totals['cum_response_rate'];"
+								]
+         }
+        }
+       },
+       "first_time":{
+        "header":"First Time",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_first_time",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       },
+       "rededication":{
+        "header":"Rededication",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_rededications",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       },
+       "questions":{
+        "header":"Questions",
+        "getters":{
+         "value":{
+          "accessor":"row",
+          "key":"cum_questions",
+          "type":"integer",
+          "format":"commafy"
+         },
+         "footer":{
+          "accessor":"column",
+          "method":"sum",
+          "type":"integer",
+          "format":"commafy"
+         }
+        }
+       }
+      }
+     },
+     {
+      "object":"text",
+      "content":"* Special Calculation: The Response Rate is Decisions/Visitors. Grand Total Response Rates must be calced off of Grand Totals of Decisions/Visitors."
+     }
+    ]
+   },
+   {
+    "type":"iterator",
+    "iterator":{
+     "each":"dataset",
+     "index":"outer_index",
+     "value":"outer_row",
+     "schema":{
+      "id":"sheet_{$outer_index}",
+      "title":{
+       "accessor":"fn",
+       "function":"return $outer_row['name'];"
+      },
+      "properties":{
+       "website_id":{
+        "accessor":"fn",
+        "function":"return $outer_row['website_id'];",
+        "dependencies":[
+         "outer_row"
+        ]
+       }
+      },
+      "contents":[
+       {
+        "object":"table",
+        "type":"breakdown",
+        "datasource":"outer_row",
+        "title":{
+         "accessor":"fn",
+         "function":"return $outer_row['name'].' Stats';"
+        },
+        "styles":{
+         "title":{
+          "alignment":{
+           "horizontal":"left"
+          },
+          "font":{
+           "bold":true
+          }
+         },
+         "heading(month_total,ytd_total,cum_total)":{
+          "alignment":{
+           "horizontal":"center"
+          },
+          "borders":{
+           "outline":{
+            "style":"thin"
+           }
+          },
+          "font":{
+           "bold":true
+          }
+         },
+         "body label":{
+          "font":{
+           "bold":true,
+           "underline":true
+          }
+         },
+         "body month_total":{
+          "borders":{
+           "outline":{
+            "style":"thin"
+           }
+          }
+         },
+         "body ytd_total":{
+          "borders":{
+           "outline":{
+            "style":"thin"
+           }
+          }
+         },
+         "body cum_total":{
+          "borders":{
+           "outline":{
+            "style":"thin"
+           }
+          }
+         },
+         "body data not_empty checksum":{
+          "borders":{
+           "outline":{
+            "style":"thin"
+           }
+          }
+         },
+         "body last_row(month_total,ytd_total,cum_total,checksum)":{
+          "borders":{
+           "bottom":{
+            "style":"double"
+           }
+          }
+         }
+        },
+        "columns":{
+         "row_label":{
+          "header":null
+         },
+         "month_total":{
+          "getters":{
+           "header":{
+            "accessor":"fn",
+            "function":"return 'Month End '.date('n/j/y',strtotime($report->monthstamp));"
+           }
+          }
+         },
+         "ytd_total":{
+          "header":"YTD"
+         },
+         "cum_total":{
+          "header":"Cumulative"
+         },
+         "checksum":{
+
+         }
+        },
+        "rows":[
+         {
+          "type":"divider"
+         },
+         {
+          "type":"divider",
+          "label":"Totals"
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Visitors"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_visits"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_visits"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_visits"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Prayers",
+            "type":"string"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_prayers"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_prayers"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_prayers"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Response rate"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_response_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_response_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_response_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Forms filled"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Form filled rate, visitors"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_visits_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_visits_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_visits_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Form filled rate, prayers"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_prayers_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_prayers_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_prayers_form_fill_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"divider"
+         },
+         {
+          "type":"divider",
+          "label":"Breakdown of forms"
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"First time"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_first_time"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_first_time"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_first_time"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "checksum":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_first_time_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Rededication"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_rededications"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_rededications"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_rededications"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "checksum":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_rededications_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Question"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_questions"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_questions"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_questions"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "checksum":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_questions_rate"
+             }
+            },
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         },
+         {
+          "type":"data",
+          "columns":{
+           "row_label":{
+            "value":"Total"
+           },
+           "month_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"mtd_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "ytd_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"ytd_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "cum_total":{
+            "getters":{
+             "value":{
+              "accessor":"outer_row",
+              "key":"cum_form_fills"
+             }
+            },
+            "type":"integer",
+            "format":"commafy"
+           },
+           "checksum":{
+            "value":1,
+            "type":"decimal",
+            "format":"percentify"
+           }
+          }
+         }
+        ]
+       }
+      ]
+     }
+    }
+   }
+  ]
+ }
+}

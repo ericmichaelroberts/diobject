@@ -1,0 +1,887 @@
+{
+   "description":{
+      "heading":"PeaceWithGod.TV Monthly Report",
+      "metrics":[
+         "Monthly",
+         "Visitors",
+         "Decisions",
+         "First Time",
+         "Rededications",
+         "Totals"
+      ],
+      "keywords":[
+         "Monthly",
+         "YTD",
+         "Canada",
+         "PeaceWithGod.TV"
+      ]
+   },
+   "methods":{
+      "get_data_container":{
+         "args":[
+
+         ],
+         "function":[
+            "$output = [];",
+            "$websites = $this->user_website_ids;",
+            "foreach( $websites as $website_id ){",
+            "$output[$website_id] = $this->get_row_template( $website_id );",
+            "}",
+            "return $output;"
+         ]
+      },
+      "get_row_template":{
+         "args":[
+            "$website_id"
+         ],
+         "function":[
+            "$output = new stdClass;",
+            "$output->website_id = $website_id;",
+            "$output->name = $this->websites->available[$website_id];",
+            "$metrics = explode(',','visitors,decisions,first_time,rededications,questions,other,form_fills');",
+            "$periods = [ null, 'ytd' ];",
+            "$scopes = ['can','all'];",
+            "foreach( $metrics as $metric ){",
+            "foreach( $periods as $period ){",
+            "foreach( $scopes as $scope ){",
+            "$prop = implode('_',array_filter([ $scope, $period, $metric ]));",
+            "$output->$prop = 0;",
+            "}",
+            "}",
+            "}",
+            "return $output;"
+         ]
+      },
+      "assemble_data":{
+         "args":[
+            "$dataset"
+         ],
+         "function":[
+            "$output = $this->get_data_container();",
+            "foreach($dataset as $row){",
+            "$website_id = $row['website_id'];",
+            "$metric = $row['metric'];",
+            "$cvalue = $row['canada_total'];",
+            "$cmetric = \"can_{$metric}\";",
+            "$avalue = $row['world_total'];",
+            "$ametric = \"all_{$metric}\";",
+            "$output[$website_id]->$cmetric = $cvalue;",
+            "$output[$website_id]->$ametric = $avalue;",
+            "}",
+            "foreach($output as $website_id => $dataObject){",
+            "$this->calculate_totals( $dataObject );",
+            "$output[$website_id] = (array)$dataObject;",
+            "}",
+            "return array_values($output);"
+         ]
+      },
+      "calculate_totals":{
+         "args":[
+            "$dataObject"
+         ],
+         "function":[
+            "extract((array)$dataObject);",
+            "$dataObject->all_form_fills = array_sum([",
+            "$all_first_time,",
+            "$all_rededications,",
+            "$all_questions,",
+            "$all_other",
+            "]);",
+            "$dataObject->can_form_fills = array_sum([",
+            "$can_first_time,",
+            "$can_rededications,",
+            "$can_questions,",
+            "$can_other",
+            "]);",
+            "$dataObject->ytd_all_form_fills = array_sum([",
+            "$all_ytd_first_time,",
+            "$all_ytd_rededications,",
+            "$all_ytd_questions,",
+            "$all_ytd_other",
+            "]);",
+            "$dataObject->ytd_can_form_fills = array_sum([",
+            "$can_ytd_first_time,",
+            "$can_ytd_rededications,",
+            "$can_ytd_questions,",
+            "$can_ytd_other",
+            "]);"
+         ]
+      }
+   },
+   "properties":{
+      "user_id":{
+         "type":"int",
+         "accessor":"ci",
+         "path":"session/userdata/user_id",
+         "cached":true
+      },
+      "user_websites":{
+         "type":"array",
+         "accessor":"db",
+         "dependencies":[
+            "user_id"
+         ],
+         "query":"SELECT A.website_id AS value, B.name AS title FROM qry_user_website_assignments A LEFT JOIN websites B ON (A.website_id=B.website_id) WHERE user_id = {$user_id} AND published=1 AND is_dev=0 AND is_widget=0 AND is_touch=0 AND is_mobile=0 AND (B.ministry_id = 1 OR LOWER(url) IN ('forgive.me','perdona.me','ineedhope.me')) ORDER BY name ASC",
+         "cached":true
+      },
+      "user_website_ids":{
+         "type":"array",
+         "accessor":"ui",
+         "parameter":"user_website_ids",
+         "dependencies":[
+            "user_websites"
+         ],
+         "default":{
+            "accessor":"fn",
+            "function":"$tmp = array(); foreach($report->user_websites as $row){ $tmp[]=$row['value']; } return $tmp;"
+         },
+         "cached":true
+      },
+      "monthstamp":{
+         "type":"string",
+         "accessor":"ui",
+         "parameter":"monthstamp",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return date('Y-m-d',strtotime('first day of previous month'));"
+         }
+      },
+      "last_of_month":{
+         "type":"string",
+         "accessor":"db",
+         "dependencies":[
+            "monthstamp"
+         ],
+         "parameter":"last_of_month",
+         "cached":true,
+         "query":"SELECT LAST_DAY('{$monthstamp}') AS last_of_month",
+         "process_fn":[
+            "foreach($recordset as $record){ return $record['last_of_month']; }"
+         ]
+      },
+      "websites":{
+         "type":"object",
+         "dependencies":[
+            "user_websites",
+            "user_website_ids"
+         ],
+         "accessor":"fn",
+         "cached":true,
+         "function":[
+            "$output = new stdClass;",
+            "$available = [];",
+            "foreach($user_websites as $arr){",
+            "$available[$arr['value']] = $arr['title'];",
+            "}",
+            "$output->available = $available;",
+            "$output->selected = $user_website_ids;",
+            "$output->imploded = implode(',',$user_website_ids);",
+            "return $output;"
+         ]
+      },
+      "month":{
+         "type":"object",
+         "dependencies":[
+            "monthstamp",
+            "last_of_month"
+         ],
+         "accessor":"fn",
+         "cached":true,
+         "function":[
+            "$date = strtotime($monthstamp);",
+            "$last = strtotime($last_of_month);",
+            "$last_as_title = date('M Y',$last);",
+            "$output = new stdClass;",
+            "$output->last_of_month = $last_of_month;",
+            "$output->stamp = $monthstamp;",
+            "$output->short = date('M',$date);",
+            "$output->title = date('M Y',$date);",
+            "$output->slashed = date('n/j/y',$date);",
+            "$output->number = date('n',$date);",
+            "$output->year = date('Y',$date);",
+            "$output->table_title = \"{$output->title} - {$last_as_title} (Outreach PeaceWithGod.TV)\";",
+            "return $output;"
+         ]
+      },
+      "filter_ip":{
+         "type":"boolean",
+         "accessor":"ui",
+         "parameter":"filter_ip",
+         "cached":true,
+         "default":true
+      },
+      "data_query":{
+         "type":"string",
+         "accessor":"fn",
+         "dependencies":[
+            "websites",
+            "month",
+            "filter_ip"
+         ],
+         "cached":true,
+         "function":[
+            "$iTable = $filter_ip ? 'interactions_filtered' : 'interactions';",
+            "$fWhere = $filter_ip ? ' AND A.filtered=0' : '';",
+            "return \"SELECT",
+            "metric,",
+            "SUM(total) AS world_total,",
+            "SUM(canadian) AS canada_total,",
+            "website_id",
+            "FROM (",
+            "SELECT",
+            "website_id,",
+            "total,",
+            "canadian,",
+            "CONCAT(",
+            "IF(ISNULL(in_month), 'ytd_', ''),",
+            "IF(type = 0, 'first_time', IF(type = 2,'questions',IF(type = 1, 'rededications', 'other')))) AS metric",
+            "FROM (",
+            "SELECT",
+            "website_id,",
+            "type,",
+            "COUNT(1) AS total,",
+            "IF(monthstamp = '{$month->stamp}', 1, 0) AS in_month,",
+            "COUNT(DISTINCT CASE WHEN B.country_code = 'CA' THEN interaction_id ELSE null END) AS canadian",
+            "FROM {$iTable} A",
+            "JOIN iplocations B USING (interaction_id)",
+            "WHERE",
+            "A.website_id IN({$websites->imploded})",
+            "AND A.monthstamp <= '{$month->stamp}'",
+            "AND A.yearstamp = {$month->year}",
+            "AND LOWER(A.profession) = 'peacewithgod.tv'",
+            "GROUP BY website_id, type , in_month WITH ROLLUP",
+            ") Z",
+            "WHERE",
+            "type IS NOT NULL",
+            "AND (in_month = 1 OR in_month IS NULL) ",
+            "UNION",
+            "SELECT",
+            "website_id,",
+            "total,",
+            "canadian,",
+            "CONCAT(",
+            "IF(in_month = 1, '', 'ytd_'),",
+            "'visitors'",
+            ") AS metric",
+            "FROM (",
+            "SELECT",
+            "website_id,",
+            "COUNT(DISTINCT visitor_uuid) AS total,",
+            "MONTH(A.datestamp) = {$month->number} AS in_month,",
+            "COUNT(DISTINCT CASE WHEN C.country_id=40 THEN visitor_uuid ELSE NULL END) AS canadian",
+            "FROM piwik_unique_visits A",
+            "LEFT JOIN piwik_locations B USING (location_id)",
+            "LEFT JOIN piwik_cities C USING (city_id)",
+            "WHERE",
+            "A.website_id IN({$websites->imploded})",
+            "AND A.datestamp BETWEEN '{$month->year}-01-01' AND LAST_DAY('{$month->stamp}')",
+            "AND A.outreach_ids REGEXP '[[:<:]]208[[:>:]]' {$fWhere}",
+            "GROUP BY website_id, in_month WITH ROLLUP",
+            ") XX",
+            "WHERE in_month = 1 OR in_month IS NULL ",
+            "UNION",
+            "SELECT",
+            "website_id,",
+            "total,",
+            "canadian,",
+            "CONCAT(",
+            "IF(in_month = 1, '', 'ytd_'),",
+            "'decisions'",
+            ") AS metric",
+            "FROM (",
+            "SELECT",
+            "website_id,",
+            "COUNT(DISTINCT visitor_uuid) AS total,",
+            "MONTH(A.datestamp) = {$month->number} AS in_month,",
+            "COUNT(DISTINCT CASE WHEN C.country_id=40 THEN visitor_uuid ELSE NULL END) AS canadian",
+            "FROM piwik_unique_visits A",
+            "LEFT JOIN piwik_locations B USING (location_id)",
+            "LEFT JOIN piwik_cities C USING (city_id)",
+            "WHERE",
+            "A.website_id IN({$websites->imploded})",
+            "AND A.datestamp BETWEEN '{$month->year}-01-01' AND LAST_DAY('{$month->stamp}')",
+            "AND prayer = 1",
+            "AND A.outreach_ids REGEXP '[[:<:]]208[[:>:]]' {$fWhere}",
+            "GROUP BY website_id, in_month WITH ROLLUP",
+            ") YY",
+            "WHERE in_month = 1 OR in_month IS NULL",
+            ") W",
+            "WHERE website_id IS NOT NULL",
+            "GROUP BY website_id, metric\";"
+         ]
+      },
+      "dataset":{
+         "type":"array",
+         "accessor":"db",
+         "dependencies":[
+            "data_query"
+         ],
+         "query":"{$data_query}",
+         "cached":true
+      },
+      "assembled_data":{
+         "type":"array",
+         "accessor":"fn",
+         "dependencies":[
+            "dataset"
+         ],
+         "function":"return $report->assemble_data($dataset);",
+         "cached":true
+      },
+      "default_filename":{
+         "type":"string",
+         "dependencies":[
+            "month"
+         ],
+         "parameter":"default_filename",
+         "accessor":"fn",
+         "cached":true,
+         "function":"return \"PeaceWithGod-TV-{$month->short}-{$month->year}.xls\";"
+      },
+      "file_name":{
+         "type":"string",
+         "dependencies":[
+            "default_filename"
+         ],
+         "parameter":"file_name",
+         "accessor":"ui",
+         "cached":true,
+         "default":"{$default_filename}"
+      }
+   },
+   "requires":{
+      "SFJ Websites (1 or more)":{
+         "dependencies":[
+            "user_websites"
+         ],
+         "accessor":"fn",
+         "function":"return sizeof($user_websites) > 0;",
+         "failure":"Sorry, this report requires access one or more SFJ websites."
+      }
+   },
+   "ui":{
+      "dependencies":[
+         "user_websites",
+         "user_website_ids",
+         "monthstamp",
+         "default_filename",
+         "filter_ip"
+      ],
+      "components":{
+         "filter_ip":{
+            "label":"IP Filter",
+            "type":"toggle",
+            "parameter":"filter_ip",
+            "value":{
+               "accessor":"fn",
+               "function":"return $report->filter_ip;"
+            }
+         },
+         "month_select":{
+            "label":"Select Month",
+            "type":"datepicker",
+            "parameter":"monthstamp",
+            "value":"{$monthstamp}",
+            "onChange":{
+               "args":[
+                  "e"
+               ],
+               "body":[
+                  "var",
+                  "regex = /((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\-20[1|2][0-9])/,",
+                  "nvalue = moment(this.value,'YYYY-MM-DD'),",
+                  "fname = this.formProxy.values.file_name;",
+                  "if( regex.test(fname) ){",
+                  "this.formProxy.fields.file_name.set_value(",
+                  "fname.replace( regex, nvalue.format('MMM[-]YYYY') )",
+                  ");",
+                  "}"
+               ]
+            },
+            "options":{
+               "autoclose":true,
+               "startDate":"2011-01-01",
+               "startView":"months",
+               "format":"MM yyyy",
+               "minViewMode":"months",
+               "maxViewMode":"years",
+               "endDate":"0d"
+            }
+         },
+         "websites_select":{
+            "label":"Choose Websites",
+            "type":"checkboxes",
+            "parameter":"user_website_ids",
+            "options":{
+               "source":"user_websites",
+               "value_key":"value",
+               "label_key":"title",
+               "preselect":true
+            },
+            "validate":{
+               "not_empty":"Please select at least 1 website."
+            }
+         },
+         "filename_input":{
+            "parameter":"file_name",
+            "label":"Excel Filename",
+            "type":"text",
+            "validate":[
+               "not_empty",
+               "valid_filename"
+            ],
+            "value":"{$default_filename}"
+         }
+      },
+      "layout":[
+         [
+            [
+               "filter_ip",
+               "month_select"
+            ],
+            "filename_input"
+         ],
+         "websites_select"
+      ]
+   },
+   "workbook":{
+      "dependencies":[
+         "month",
+         "file_name",
+         "websites",
+         "last_of_month",
+         "assembled_data"
+      ],
+      "spreadsheets":[
+         {
+            "id":"world",
+            "type":"static",
+            "title":"Worldwide",
+            "contents":[
+               {
+                  "object":"table",
+                  "type":"basic",
+                  "title":"{$month->table_title}",
+                  "datasource":"assembled_data",
+                  "totals":true,
+                  "styles":{
+                     "title":{
+                        "font":{
+                           "color":"white"
+                        },
+                        "fill":"black",
+                        "height":30
+                     },
+                     "heading":{
+                        "alignment":{
+                           "horizontal":"center",
+                           "wrap":true,
+                           "vertical":"top"
+                        },
+                        "borders":{
+                           "outline":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        },
+                        "font":{
+                           "bold":true
+                        }
+                     },
+                     "table":{
+                        "borders":{
+                           "outline":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        }
+                     },
+                     "data":{
+                        "alignment":{
+                           "vertical":"top",
+                           "indent":1
+                        },
+                        "borders":{
+                           "left":{
+                              "style":"thin",
+                              "color":"#000000"
+                           },
+                           "right":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        }
+                     },
+                     "data(integer)":{
+                        "alignment":{
+                           "horizontal":"center",
+                           "indent":0
+                        }
+                     },
+                     "data(string)":{
+                        "alignment":{
+                           "horizontal":"center",
+                           "indent":0
+                        }
+                     },
+                     "data(lvl_0_start)":{
+                        "borders":{
+                           "top":{
+                              "style":"thin",
+                              "color":"#333333"
+                           }
+                        }
+                     },
+                     "data(lvl_0_end)":{
+                        "borders":{
+                           "bottom":{
+                              "style":"thin",
+                              "color":"#333333"
+                           }
+                        }
+                     },
+                     "data(lvl_1_start)":{
+                        "borders":{
+                           "top":{
+                              "style":"thin",
+                              "color":"#888888"
+                           }
+                        }
+                     },
+                     "data(lvl_1_end)":{
+                        "borders":{
+                           "bottom":{
+                              "style":"thin",
+                              "color":"#888888"
+                           }
+                        }
+                     }
+                  },
+                  "columns":{
+                     "website":{
+                        "header":"Website",
+                        "subcolumns":{
+                           "website_id":{
+                              "header":"ID",
+                              "getters":{
+                                 "value":{
+                                    "accessor":"row",
+                                    "key":"website_id",
+                                    "type":"integer"
+                                 }
+                              }
+                           },
+                           "website_name":{
+                              "header":"Name",
+                              "getters":{
+                                 "value":{
+                                    "accessor":"row",
+                                    "key":"name",
+                                    "type":"string"
+                                 }
+                              }
+                           }
+                        }
+                     },
+                     "form_fills":{
+                        "header":"Form-Fills",
+                        "subcolumns":{
+                           "first_time":{
+                              "header":"First Time",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"all_first_time",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "renewal":{
+                              "header":"Renewal",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"all_rededications",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "question":{
+                              "header":"Question",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"all_questions",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "other":{
+                              "header":"Other",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"all_other",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "total":{
+                              "header":"Total",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"all_form_fills",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           }
+                        }
+                     },
+                     "decisions":{
+                        "header":"Decisions",
+                        "getters":{
+                           "value":{
+                              "accessor":"row",
+                              "key":"all_decisions",
+                              "type":"integer",
+                              "format":"commafy"
+                           }
+                        }
+                     },
+                     "visits":{
+                        "header":"Visitors",
+                        "getters":{
+                           "value":{
+                              "accessor":"row",
+                              "key":"all_visitors",
+                              "type":"integer",
+                              "format":"commafy"
+                           }
+                        }
+                     }
+                  }
+               }
+            ]
+         },
+         {
+            "id":"canada",
+            "type":"static",
+            "title":"Canada",
+            "contents":[
+               {
+                  "type":"iterator",
+                  "iterator":{
+                     "each":"assembled_data",
+                     "index":"current_index",
+                     "value":"current_row",
+                     "schema":{
+                        "object":"table",
+                        "type":"breakdown",
+                        "datasource":"current_row",
+                        "styles":{
+                           "title":{
+                              "font":{
+                                 "bold":true
+                              }
+                           },
+                           "title,heading,data":{
+                              "alignment":{
+                                 "horizontal":"left"
+                              }
+                           },
+                           "heading":{
+                              "height":50,
+                              "fill":{
+                                 "color":"#DCE6F1"
+                              }
+                           },
+                           "data(row_2)":{
+                              "borders":{
+                                 "top":{
+                                    "style":"thin"
+                                 }
+                              }
+                           },
+                           "data(row_4)":{
+                              "borders":{
+                                 "bottom":{
+                                    "style":"thin"
+                                 }
+                              }
+                           },
+                           "data(row_2,row_3,row_4)":{
+                              "borders":{
+                                 "left":{
+                                    "style":"thin"
+                                 },
+                                 "right":{
+                                    "style":"thin"
+                                 }
+                              }
+                           }
+                        },
+                        "columns":{
+                           "row_label":{
+                              "getters":{
+                                 "header":"{$current_row['name']}"
+                              }
+                           },
+                           "month_total":{
+                              "getters":{
+                                 "header":"{$month->title}"
+                              }
+                           },
+                           "ytd_total":{
+                              "getters":{
+                                 "header":"Year To Date"
+                              }
+                           }
+                        },
+                        "rows":[
+                           {
+                              "type":"data",
+                              "columns":{
+                                 "row_label":{
+                                    "value":"Total Visitors"
+                                 },
+                                 "month_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_visitors']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 },
+                                 "ytd_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_ytd_visitors']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 }
+                              }
+                           },
+                           {
+                              "type":"data",
+                              "columns":{
+                                 "row_label":{
+                                    "value":"Total Indicated Decisions",
+                                    "type":"string"
+                                 },
+                                 "month_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_decisions']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 },
+                                 "ytd_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_ytd_decisions']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 }
+                              }
+                           },
+                           {
+                              "type":"data",
+                              "columns":{
+                                 "row_label":{
+                                    "value":"First Time"
+                                 },
+                                 "month_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_first_time']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 },
+                                 "ytd_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_ytd_first_time']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 }
+                              }
+                           },
+                           {
+                              "type":"data",
+                              "columns":{
+                                 "row_label":{
+                                    "value":"Rededication"
+                                 },
+                                 "month_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_rededications']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 },
+                                 "ytd_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_ytd_rededications']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 }
+                              }
+                           },
+                           {
+                              "type":"data",
+                              "columns":{
+                                 "row_label":{
+                                    "value":"Grand Total"
+                                 },
+                                 "month_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_first_time'] + $row['can_rededications']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 },
+                                 "ytd_total":{
+                                    "getters":{
+                                       "value":{
+                                          "accessor":"fn",
+                                          "function":"return $current_row['can_ytd_first_time'] + $current_row['can_ytd_rededications']"
+                                       }
+                                    },
+                                    "type":"integer",
+                                    "format":"commafy"
+                                 }
+                              }
+                           }
+                        ]
+                     }
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}

@@ -1,0 +1,1222 @@
+{
+   "description":{
+      "heading":"Outreach Report",
+      "metrics":[
+         "Visitors",
+         "Decisions",
+         "Form Fills",
+         "Outreach Totals"
+      ],
+      "keywords":[
+         "Outreach",
+         "Websites",
+         "Internet Evangelism"
+      ]
+   },
+   "methods":{
+      "case_insensitve_property_exists":{
+         "args":[
+            "$obj",
+            "$prop"
+         ],
+         "function":[
+            "return property_exists($obj,$prop) ? $prop",
+            ": (!is_numeric($prop) && in_array(strtolower($prop),array_map('strtolower',array_keys((array)$obj)))",
+            "? ${array_combine($array_map('strtolower',array_keys((array)$obj)),array_keys((array)$obj))}[strtolower($prop)]",
+            ": false);"
+         ]
+      },
+      "outreach_lookahead":{
+         "args":[
+
+         ],
+         "function":[
+            "$outreach_token=$this->get_request_var('outreach_token');",
+            "$available_outreaches=$this->available_outreaches;",
+            "$output=array();",
+            "$grepfilter = \"/^[a-z0-9\\-\\s]*{$outreach_token}[a-z0-9\\-\\s]*$/i\";",
+            "$matches = preg_grep($grepfilter,$available_outreaches);",
+            "foreach($matches as $id => $match){ $output[]=array('id'=>$id,'text'=>$match); };",
+            "exit(json_encode(array('results'=>$output)));"
+         ]
+      },
+      "groups_to_keys":{
+         "args":[
+            "$input"
+         ],
+         "function":[
+            "$output = array();",
+            "foreach($input as $token){",
+            "switch($token){",
+            "case 'period': $output[]=$this->period; break;",
+            "case 'outreach': $output[]='profession'; break;",
+            "case 'website': $output[]='website_id'; break;",
+            "default: $output[]=$token; break;",
+            "}",
+            "}",
+            "return $output;"
+         ]
+      },
+      "reorder_custom":{
+         "args":[
+            "$recordset",
+            "$groups=array()"
+         ],
+         "function":[
+            "usort($recordset,function($a,$b)use($groups){",
+            "$tmp=0;",
+            "$keys=array_values($groups);",
+            "do{",
+            "$k=array_shift($keys);",
+            "$tmp=is_numeric($a[$k])",
+            " ? ($a[$k]==$b[$k]",
+            " ? 0",
+            " : ($a[$k]<$b[$k]",
+            " ? -1",
+            " : 1))",
+            " : (",
+            "preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/',$a[$k])",
+            " ? (strtotime($a[$k])==strtotime($b[$k])",
+            " ? 0",
+            " : (strtotime($a[$k]) < strtotime($b[$k]) ? -1 : 1)",
+            " )",
+            " : strcasecmp($a[$k],$b[$k])",
+            ");",
+            "}while(!empty($keys) && $tmp==0);",
+            "return $tmp;",
+            "});",
+            "return $recordset;"
+         ]
+      },
+      "do_prayer_grouping":{
+         "args":[
+            "$output",
+            "$input",
+            "$groups=array()"
+         ],
+         "function":[
+            "if(empty($groups)){",
+            "foreach($input as $key => $value){",
+            "if(!property_exists($output,$key)){",
+            "$output->$key = $input[$key];",
+            "}",
+            "}",
+            "return $output->decisions = $input['total'];",
+            "}else{",
+            "$key=array_shift($groups);",
+            "$value=$input[$key];",
+            "if(!property_exists($output,$value)){ $output->$value = new stdClass; }",
+            "return $this->do_prayer_grouping($output->$value,$input,$groups);",
+            "}"
+         ]
+      },
+      "do_interaction_grouping":{
+         "args":[
+            "$output",
+            "$input",
+            "$groups=array()"
+         ],
+         "function":[
+            "if(empty($groups)){",
+            "if(!property_exists($output,'form_fills')){ $output->form_fills = 0; }",
+            "if(!property_exists($output,'first_time')){ $output->first_time = 0; }",
+            "if(!property_exists($output,'renewal')){ $output->renewal = 0; }",
+            "if(!property_exists($output,'question')){ $output->question = 0; }",
+            "if(!property_exists($output,'other')){ $output->other = 0; }",
+            "switch($input['type']){",
+            "case 0: $output->first_time += $input['total']; break;",
+            "case 1: $output->renewal += $input['total']; break;",
+            "case 2: $output->question += $input['total']; break;",
+            "default: $output->other += $input['total']; break;",
+            "}",
+            "foreach($input as $key => $value){ if(!property_exists($output,$key)){ $output->$key = $input[$key]; } };",
+            "return $output->form_fills += $input['total'];",
+            "}else{",
+            "$key=array_shift($groups);",
+            "$value=$input[$key];",
+            "if(!property_exists($output,$value)){ $output->$value = new stdClass; }",
+            "return $this->do_interaction_grouping($output->$value,$input,$groups);",
+            "}"
+         ]
+      },
+      "do_visits_grouping":{
+         "args":[
+            "$output",
+            "$input",
+            "$groups=array()"
+         ],
+         "function":[
+            "if(empty($groups)){",
+            "foreach($input as $key => $value){ if(!property_exists($output,$key)){ $output->$key = $input[$key]; } };",
+            "return $output->visits = $input['total'];",
+            "}else{",
+            "$key=array_shift($groups);",
+            "$value=$input[$key];",
+            "if(!property_exists($output,$value)){ $output->$value = new stdClass; }",
+            "return $this->do_visits_grouping($output->$value,$input,$groups);",
+            "}"
+         ]
+      },
+      "normalize_factored_groups":{
+         "args":[
+            "$f",
+            "$grouping=array()",
+            "$data",
+            "$level=0",
+            "$knowns=array()"
+         ],
+         "function":[
+            "$groupingKeys=array_values($grouping);",
+            "if($level < sizeof($groupingKeys)){",
+            "$levelKey = $groupingKeys[$level];",
+            "$nextLevel = $level+1;",
+            "foreach($data as $key => $subData){",
+            "$levelValue = $key;",
+            "$knowns[$levelKey]=$levelValue;",
+            "$this->normalize_factored_groups($f,$groupingKeys,$subData,$nextLevel,$knowns);",
+            "}",
+            "}else{",
+            "$temp=array_merge(array_fill_keys(array('decisions','form_fills','first_time','renewal','question','other','visits'),0),(array)$knowns);",
+            "foreach($data as $key => $value){ $temp[$key]=$value; }",
+            "$f->output[]=$temp;",
+            "}"
+         ]
+      },
+      "multilevel_sort":{
+         "args":[
+            "$f",
+            "$grouping"
+         ],
+         "function":[
+            "$sorted = $this->do_multisort((array)$f->totals,sizeof($grouping));",
+            "$f->totals = $sorted;"
+         ]
+      },
+      "do_multisort":{
+         "args":[
+            "$input",
+            "$levels"
+         ],
+         "function":[
+            "$levels--;",
+            "$output = [];",
+            "foreach($input as $key => $data){",
+            "$output[$key] = $levels > 0",
+            "? $this->do_multisort((array)$data,$levels)",
+            ": $data;",
+            "}",
+            "ksort($output);",
+            "return (object)$output;"
+         ]
+      },
+      "refactor_interactions":{
+         "args":[
+            "$f",
+            "$interactions",
+            "$groups=array()"
+         ],
+         "function":[
+            "$interactions = $this->reorder_custom($interactions,$groups);",
+            "foreach($interactions as $row){ $this->do_interaction_grouping( $f->totals, $row, $groups ); }"
+         ]
+      },
+      "refactor_prayers":{
+         "args":[
+            "$f",
+            "$prayers",
+            "$groups=array()"
+         ],
+         "function":[
+            "$prayers = $this->reorder_custom($prayers,$groups);",
+            "foreach($prayers as $row){ $this->do_prayer_grouping( $f->totals, $row, $groups ); }"
+         ]
+      },
+      "refactor_visits":{
+         "args":[
+            "$f",
+            "$visits",
+            "$groups=array()"
+         ],
+         "function":[
+            "$visits = $this->reorder_custom($visits,$groups);",
+            "foreach($visits as $row){ $this->do_visits_grouping( $f->totals, $row, $groups ); }"
+         ]
+      },
+      "refactor_datasets":{
+         "args":[
+            "$daterange",
+            "$interactions",
+            "$prayers",
+            "$visits",
+            "$grouping"
+         ],
+         "function":[
+            "$f = new stdClass;",
+            "$f->period = $this->period;",
+            "$f->website_names = $this->website_names;",
+            "$f->grouping = $grouping;",
+            "$f->totals = new stdClass;",
+            "$f->output = array();",
+            "$groupingKeys = array_values($grouping);",
+            "$this->refactor_prayers($f,$prayers,$groupingKeys);",
+            "$this->refactor_interactions($f,$interactions,$groupingKeys);",
+            "$this->refactor_visits($f,$visits,$groupingKeys);",
+            "$this->multilevel_sort($f,$grouping);",
+            "$this->normalize_factored_groups($f,$grouping,$f->totals);",
+            "return $f->output;"
+         ]
+      },
+      "ids_to_string":{
+         "args":[
+            "$ids"
+         ],
+         "function":"return is_null($ids) || empty($ids) ? '' : implode(',',$ids);"
+      },
+      "reassemble_selected_outreaches":{
+         "args":[
+            "$selected_ids"
+         ],
+         "function":[
+            "if(is_bool($selected_ids)){",
+            "$report = (array)$this;",
+            "$report = array_diff_key($report,array_flip(['__fw',]));",
+            "$this->debugger(compact('selected_ids','report'));",
+            "}",
+            "return is_null($selected_ids) || empty($selected_ids)",
+            "? []",
+            ": array_intersect_key($this->available_outreaches,array_flip($selected_ids));"
+         ]
+      },
+      "hierarchy_to_array":{
+         "args":[
+            "$period",
+            "$hierarchy_string"
+         ],
+         "function":[
+            "$output=[];",
+            "$map = [",
+            "'period' => $period,",
+            "'website' => 'website_id',",
+            "'outreach' => 'profession'",
+            "];",
+            "$keys = explode('_',$hierarchy_string);",
+            "foreach($keys as $key){",
+            "$output[$key] = $map[$key];",
+            "}",
+            "return $output;"
+         ]
+      },
+      "build_prayers_query":{
+         "args":[
+            "$start_date",
+            "$end_date",
+            "$period",
+            "$filter_ip",
+            "$user_website_ids_joined",
+            "$profession_filter"
+         ],
+         "function":[
+            "$filter_clause = $filter_ip ? ' LEFT OUTER JOIN filtered_ips B ON(A.ip_address LIKE B.ip_string)' : '';",
+            "$inner_query = trim(\"",
+            "SELECT",
+            "A.{$period},",
+            "A.gacookie,",
+            "A.website_id,",
+            "LOWER(A.profession) AS profession",
+            "FROM prayers A{$filter_clause}",
+            "WHERE",
+            "A.{$period} BETWEEN '{$start_date}' AND '{$end_date}' AND ",
+            "A.website_id IN ({$user_website_ids_joined}) AND ",
+            "LOWER(profession) {$profession_filter}",
+            "GROUP BY website_id, LOWER(profession), gacookie",
+            "\");",
+            "return trim(\"",
+            "SELECT",
+            "A.{$period},",
+            "A.website_id,",
+            "A.profession,",
+            "COUNT(*) AS total",
+            "FROM ({$inner_query}) A",
+            "GROUP BY {$period}, website_id, profession",
+            "\");"
+         ]
+      },
+      "build_visits_query":{
+         "args":[
+            "$start_date",
+            "$end_date",
+            "$period",
+            "$filter_ip",
+            "$user_website_ids_joined",
+            "$outreaches"
+         ],
+         "function":[
+            "$filter_clause = $filter_ip ? 'AND filtered=0' : '';",
+            "$outreach_clause = is_null($outreaches) || empty($outreaches)",
+            "? 'outreach_id IS NOT NULL'",
+            ": 'outreach_id IN('.implode(',',array_keys($outreaches)).')';",
+            "$inner_query = trim(\"",
+            "SELECT",
+            "{$period},",
+            "visitor_uuid,",
+            "website_id,",
+            "outreach_id,",
+            "filtered",
+            "FROM piwik_data",
+            "FORCE INDEX (outreach_visit)",
+            "WHERE",
+            "datestamp BETWEEN '{$start_date}' AND '{$end_date}' AND ",
+            "website_id IN ({$user_website_ids_joined}) AND ",
+            "{$outreach_clause} {$filter_clause}",
+            "GROUP BY website_id, outreach_id, visitor_uuid",
+            "\");",
+            "return trim(\"",
+            "SELECT",
+            "A.{$period},",
+            "A.website_id,",
+            "A.outreach_id,",
+            "LOWER(B.outreach_token) AS profession,",
+            "COUNT(*) AS total",
+            "FROM ({$inner_query}) A",
+            "LEFT JOIN piwik_outreaches B USING(outreach_id)",
+            "WHERE B.outreach_token IS NOT NULL AND B.outreach_token!=''",
+            "GROUP BY {$period}, website_id, outreach_id",
+            "\");"
+         ]
+      },
+      "calculate_period_factor":{
+         "args":[
+            "$start_date",
+            "$end_date",
+            "$aggregation"
+         ],
+         "function":[
+            "$from = strtotime(\"{$start_date} 00:00:00\");",
+            "$until = strtotime(\"{$end_date} 23:59:59\");",
+            "return $start_date!=$end_date ? ($until - $from) / 86400 : 1;"
+         ]
+      },
+      "confirm_recordset_size":{
+         "args":[
+            "$inputs",
+            "$complexity",
+            "$factors"
+         ],
+         "function":[
+            "extract( $inputs );",
+            "extract( $factors );",
+            "arsort( $factors );",
+            "$factor_keys = array_keys( $factors );",
+            "$primary = array_shift( $factor_keys );",
+            "$secondary = array_shift( $factor_keys );",
+            "$tertiary = array_shift( $factor_keys );",
+            "return compact('factors','primary','secondary','tertiary','complexity');"
+         ]
+      },
+      "confirm_calculation_time":{
+         "args":[
+            "$inputs",
+            "$complexity",
+            "$factors"
+         ],
+         "function":[
+            "extract( $inputs );",
+            "extract( $factors );",
+            "arsort( $factors );",
+            "$factor_keys = array_keys( $factors );",
+            "$primary = array_shift( $factor_keys );",
+            "$secondary = array_shift( $factor_keys );",
+            "$tertiary = array_shift( $factor_keys );",
+            "return compact('factors','primary','secondary','tertiary','complexity');"
+         ]
+      },
+      "query_complexity_check":{
+         "args":[
+            "$inputs"
+         ],
+         "function":[
+            "extract( $inputs );",
+            "$period_factor = $this->calculate_period_factor( $start_date, $end_date, $aggregation );",
+            "$outreach_total = isset($outreaches) && is_array($outreaches) ? sizeof( $outreaches ) : sizeof( $this->available_outreaches );",
+            "$outreach_factor = ($outreach_total / 100) + 1;",
+            "$websites_total = sizeof( $user_website_ids );",
+            "$websites_factor = ($websites_total * 1.3) - 1;",
+            "$sitereach_factor = $outreach_factor * $websites_factor;",
+            "$complexity = $sitereach_factor * $period_factor;",
+            "return $complexity > 1200",
+            "? $this->build_confirmation($complexity,$websites_total,$outreach_total,$sitereach_factor,$period_factor)",
+            ": true;"
+         ]
+      },
+      "build_confirmation":{
+         "args":[
+            "$c,$w,$o,$s,$p"
+         ],
+         "function":[
+            "$title = \"Data-Intensive Operation\";",
+            "$dates = (int)$p;",
+            "$message[] = \"Based on the parameters you've selected for this report, the underlying dataset is estimated to require more than a minute to assemble. Contributing factors:</p>\";",
+            "$message[] = \"<p class='text-centered' style='font-size:18px;'>\";",
+            "$message[] = \"<strong>{$w}</strong> Websites<br>\";",
+            "$message[] = \"<strong>&times</strong><br>\";",
+            "$message[] = \"<strong>{$o}</strong> Outreaches<br>\";",
+            "$message[] = \"<strong>&times</strong><br>\";",
+            "$message[] = \"<strong>{$dates}</strong> Dates</p>\";",
+            "$message[] = \"<p>Choose <strong>Confirm</strong> to begin processing as specified, or <strong>Cancel</strong> to revise these options.\";",
+            "return compact('title','message');"
+         ]
+      }
+   },
+   "properties":{
+      "user_id":{
+         "type":"int",
+         "accessor":"ci",
+         "path":"session/userdata/user_id",
+         "cached":true
+      },
+      "user_websites":{
+         "type":"array",
+         "accessor":"db",
+         "dependencies":[
+            "user_id"
+         ],
+         "query":"SELECT A.website_id AS value, B.name AS title FROM qry_user_website_assignments A LEFT JOIN websites B ON (A.website_id=B.website_id) WHERE user_id = {$user_id} AND published=1 AND is_dev=0 AND is_widget=0 AND is_touch=0 AND is_mobile=0 ORDER BY name ASC",
+         "cached":true
+      },
+      "user_website_ids":{
+         "type":"array",
+         "accessor":"ui",
+         "parameter":"user_website_ids",
+         "dependencies":[
+            "user_websites"
+         ],
+         "default":{
+            "accessor":"fn",
+            "function":"$tmp = array(); foreach($report->user_websites as $row){ $tmp[]=$row['value']; } return $tmp;"
+         },
+         "cached":true
+      },
+      "user_website_ids_joined":{
+         "type":"string",
+         "accessor":"fn",
+         "dependencies":[
+            "user_website_ids"
+         ],
+         "function":"return implode(',',$report->user_website_ids);",
+         "cached":true
+      },
+      "filter_ip":{
+         "type":"boolean",
+         "accessor":"ui",
+         "parameter":"filter_ip",
+         "cached":true,
+         "default":true
+      },
+      "website_names":{
+         "type":"array",
+         "dependencies":[
+            "user_websites"
+         ],
+         "accessor":"fn",
+         "function":"$output=array();foreach($user_websites as $row){$output[$row['value']]=$row['title'];}return $output;",
+         "cached":true
+      },
+      "aggregation_choices":[
+         {
+            "value":"day",
+            "label":"Date"
+         },
+         {
+            "value":"month",
+            "label":"Month"
+         },
+         {
+            "value":"year",
+            "label":"Year"
+         }
+      ],
+      "aggregation":{
+         "type":"string",
+         "accessor":"ui",
+         "parameter":"aggregation",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return 'day';"
+         }
+      },
+      "interactions_table":{
+         "type":"string",
+         "accessor":"fn",
+         "function":"return $report->filter_ip ? 'interactions_filtered' : 'interactions';",
+         "cached":true,
+         "dependencies":[
+            "filter_ip"
+         ]
+      },
+      "outreaches_query":{
+         "type":"string",
+         "accessor":"fn",
+         "function":"return \"SELECT outreach_id, LOWER(outreach_token) AS outreach_token FROM piwik_outreaches WHERE outreach_token IS NOT NULL AND TRIM(outreach_token)!='' ORDER BY outreach_token ASC\";",
+         "dependencies":[
+            "user_website_ids_joined",
+            "interactions_table",
+            "prayers_filter"
+         ],
+         "cached":true
+      },
+      "available_outreaches":{
+         "dependencies":[
+            "outreaches_query"
+         ],
+         "type":"array",
+         "accessor":"db",
+         "query":"{$outreaches_query}",
+         "process_fn":[
+            "$output=array();",
+            "foreach($recordset as $record){",
+            "$output[$record['outreach_id']]=$record['outreach_token'];",
+            "}",
+            "return $output;"
+         ],
+         "cached":true
+      },
+      "outreaches":{
+         "type":"array",
+         "accessor":"ui",
+         "parameter":"outreaches",
+         "cached":true,
+         "default":null
+      },
+      "selected_outreaches":{
+         "type":"array",
+         "dependencies":[
+            "outreaches"
+         ],
+         "accessor":"fn",
+         "function":"return $report->reassemble_selected_outreaches($outreaches);",
+         "parameter":"selected_outreaches",
+         "cached":true,
+         "default":null
+      },
+      "outreach_filter":{
+         "dependencies":[
+            "selected_outreaches"
+         ],
+         "accessor":"fn",
+         "function":[
+            "return is_null($selected_outreaches) || empty($selected_outreaches)",
+            " ? \"IS NOT NULL AND profession !=''\"",
+            " : \"IN('\".implode(\"','\",$selected_outreaches).\"')\";"
+         ],
+         "cached":true
+      },
+      "prayers_filter":{
+         "dependencies":[
+            "filter_ip"
+         ],
+         "type":"string",
+         "accessor":"fn",
+         "function":[
+            "return $report->filter_ip",
+            " ? ' LEFT OUTER JOIN filtered_ips B ON(A.ip_address LIKE B.ip_string)'",
+            " : '';"
+         ],
+         "cached":true
+      },
+      "start_date":{
+         "type":"string",
+         "accessor":"ui",
+         "parameter":"start_date",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return date('Y-m-d',strtotime('first day of previous month'));"
+         }
+      },
+      "end_date":{
+         "type":"string",
+         "accessor":"ui",
+         "parameter":"end_date",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return date('Y-m-d',strtotime('last day of previous month'));"
+         }
+      },
+      "file_name":{
+         "type":"string",
+         "parameter":"file_name",
+         "accessor":"ui",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return 'Untitled Report.xlsx';"
+         }
+      },
+      "period":{
+         "dependencies":[
+            "aggregation"
+         ],
+         "accessor":"fn",
+         "parameter":"period",
+         "function":[
+            "switch($aggregation){",
+            "case 'day': return 'datestamp';",
+            "case 'month': return 'monthstamp';",
+            "case 'year': return 'yearstamp';",
+            "}"
+         ],
+         "cached":true
+      },
+      "visits_query":{
+         "type":"string",
+         "dependencies":[
+            "start_date",
+            "end_date",
+            "period",
+            "filter_ip",
+            "user_website_ids_joined",
+            "selected_outreaches"
+         ],
+         "accessor":"fn",
+         "parameter":"visits_query",
+         "function":"return $report->build_visits_query($start_date,$end_date,$period,$filter_ip,$user_website_ids_joined,$selected_outreaches);",
+         "cached":true
+      },
+      "visits_recordset":{
+         "type":"array",
+         "accessor":"db",
+         "dependencies":[
+            "visits_query"
+         ],
+         "parameter":"visits_recordset",
+         "query":"{$visits_query}",
+         "cached":true
+      },
+      "daterange_query":{
+         "type":"array",
+         "dependencies":[
+            "start_date",
+            "end_date",
+            "period"
+         ],
+         "accessor":"db",
+         "query":"SELECT DISTINCT({$period}) FROM qry_datestamps_expanded WHERE datestamp BETWEEN '{$start_date}' AND '{$end_date}' ORDER BY {$period} ASC",
+         "process_fn":"$output=array();foreach($recordset as $record){$output[]=$record[$period];}return $output;",
+         "cached":true
+      },
+      "interactions_query":{
+         "accessor":"fn",
+         "type":"string",
+         "dependencies":[
+            "period",
+            "interactions_table",
+            "user_website_ids_joined",
+            "outreach_filter",
+            "start_date",
+            "end_date"
+         ],
+         "function":"return \"SELECT A.{$period}, A.website_id, IF(A.type=99,1,A.type) AS `type`, LOWER(A.profession) AS profession, COUNT(*) AS total FROM {$interactions_table} A WHERE A.datestamp BETWEEN '{$start_date}' AND '{$end_date}' AND A.profession {$outreach_filter} AND A.website_id IN ({$user_website_ids_joined}) GROUP BY A.{$period}, A.website_id, IF(A.type=99,1,A.type), LOWER(A.profession)\";",
+         "cached":true
+      },
+      "interactions_recordset":{
+         "dependencies":[
+            "interactions_query"
+         ],
+         "accessor":"db",
+         "parameter":"interactions",
+         "query":"{$interactions_query}",
+         "cached":true
+      },
+      "prayers_query":{
+         "type":"string",
+         "dependencies":[
+            "start_date",
+            "end_date",
+            "period",
+            "filter_ip",
+            "user_website_ids_joined",
+            "outreach_filter"
+         ],
+         "accessor":"fn",
+         "parameter":"prayers_query",
+         "function":"return $report->build_prayers_query($start_date,$end_date,$period,$filter_ip,$user_website_ids_joined,$outreach_filter);",
+         "cached":true
+      },
+      "prayers_recordset":{
+         "type":"array",
+         "accessor":"db",
+         "dependencies":[
+            "prayers_query"
+         ],
+         "parameter":"prayers_recordset",
+         "query":"{$prayers_query}",
+         "cached":true
+      },
+      "grouping_options":[
+         {
+            "value":"period_outreach_website",
+            "label":"Period / Outreach / Website"
+         },
+         {
+            "value":"website_outreach_period",
+            "label":"Website / Outreach / Period"
+         },
+         {
+            "value":"outreach_website_period",
+            "label":"Outreach / Website / Period"
+         },
+         {
+            "value":"outreach_period_website",
+            "label":"Outreach / Period / Website"
+         },
+         {
+            "value":"website_period_outreach",
+            "label":"Website / Period / Outreach"
+         },
+         {
+            "value":"period_website_outreach",
+            "label":"Period / Website / Outreach"
+         }
+      ],
+      "grouping_hierarchy":{
+         "type":"string",
+         "accessor":"ui",
+         "parameter":"grouping_hierarchy",
+         "cached":true,
+         "default":{
+            "accessor":"fn",
+            "function":"return 'period_website_outreach';"
+         }
+      },
+      "data_grouping":{
+         "dependencies":[
+            "period",
+            "grouping_hierarchy"
+         ],
+         "type":"array",
+         "accessor":"fn",
+         "function":"return $report->hierarchy_to_array($period,$grouping_hierarchy);",
+         "cached":true
+      },
+      "processed_data":{
+         "dependencies":[
+            "period",
+            "daterange_query",
+            "interactions_recordset",
+            "prayers_recordset",
+            "visits_recordset",
+            "data_grouping"
+         ],
+         "type":"array",
+         "accessor":"fn",
+         "function":"return $this->refactor_datasets($daterange_query,$interactions_recordset,$prayers_recordset,$visits_recordset,$data_grouping);",
+         "cached":true
+      }
+   },
+   "ui":{
+      "dependencies":[
+         "user_websites",
+         "user_website_ids",
+         "website_names",
+         "start_date",
+         "end_date",
+         "file_name",
+         "period",
+         "outreaches"
+      ],
+      "components":{
+         "filter_ip":{
+            "label":"IP Filter",
+            "type":"toggle",
+            "parameter":"filter_ip",
+            "value":{
+               "accessor":"fn",
+               "function":"return $report->filter_ip;"
+            }
+         },
+         "websites_select":{
+            "label":"Choose Websites",
+            "type":"checkboxes",
+            "parameter":"user_website_ids",
+            "options":{
+               "source":"user_websites",
+               "value_key":"value",
+               "label_key":"title",
+               "preselect":true,
+               "select_all":true,
+               "deselect_all":true
+            },
+            "validate":{
+               "not_empty":"Please select at least 1 website."
+            }
+         },
+         "filename_input":{
+            "parameter":"file_name",
+            "label":"Excel Filename",
+            "type":"text",
+            "validate":[
+               "not_empty",
+               "valid_filename"
+            ],
+            "value":"{$file_name}"
+         },
+         "date_range":{
+            "label":"Date Range",
+            "type":"daterange",
+            "options":{
+               "autoclose":true,
+               "startView":"days",
+               "orientation":"bottom",
+               "minViewMode":"days",
+               "maxViewMode":"years",
+               "startDate":"2011-01-01",
+               "endDate":"{$end_date}"
+            },
+            "start_date":{
+               "parameter":"start_date",
+               "value":"{$start_date}"
+            },
+            "end_date":{
+               "parameter":"end_date",
+               "value":"{$end_date}"
+            }
+         },
+         "aggregation_select":{
+            "label":"Group Totals",
+            "type":"dropdown",
+            "parameter":"aggregation",
+            "multiple":false,
+            "placeholder":"Aggregation",
+            "select2":{
+               "closeOnSelect":true
+            },
+            "options":{
+               "source":"aggregation_choices",
+               "value_key":"value",
+               "label_key":"label",
+               "preselect":true
+            }
+         },
+         "grouping_order":{
+            "label":"Group Hierarchy",
+            "type":"dropdown",
+            "parameter":"grouping_hierarchy",
+            "multiple":false,
+            "placeholder":"Grouping Order",
+            "options":{
+               "source":"grouping_options",
+               "value_key":"value",
+               "label_key":"label",
+               "preselect":true
+            }
+         },
+         "outreach_select":{
+            "label":"Outreaches",
+            "type":"lookahead",
+            "parameter":"outreaches",
+            "multiple":true,
+            "placeholder":"All Outreaches",
+            "select2":{
+               "closeOnSelect":false,
+               "minimumInputLength":0
+            },
+            "options":{
+               "endpoint":"outreach_lookahead",
+               "lookup":"outreach_token"
+            }
+         }
+      },
+      "before_update":"query_complexity_check",
+      "layout":[
+         [
+            "filter_ip",
+            "filename_input"
+         ],
+         [
+            "aggregation_select",
+            "grouping_order",
+            "date_range"
+         ],
+         "outreach_select",
+         "websites_select"
+      ]
+   },
+   "workbook":{
+      "dependencies":[
+         "file_name",
+         "period",
+         "data_grouping",
+         "processed_data",
+         "aggregation",
+         "website_names",
+         "start_date",
+         "end_date"
+      ],
+      "methods":{
+         "aggregation_to_adjective":{
+            "args":[
+               "$aggregation"
+            ],
+            "function":[
+               "switch($aggregation){",
+               "case 'day': return 'Daily'; break;",
+               "case 'month': return 'Monthly'; break;",
+               "case 'year': return 'Yearly'; break;",
+               "}"
+            ]
+         },
+         "get_table_title":{
+            "args":[
+               "$aggregation",
+               "$start_date",
+               "$end_date"
+            ],
+            "function":[
+               "$from = strtotime($start_date);",
+               "$until = strtotime($end_date);",
+               "$start = date('F j, Y',$from);",
+               "$end = date('F j Y',$until);",
+               "return $start.' - '.$end.' ('.$this->aggregation_to_adjective($aggregation).' Totals)';"
+            ]
+         }
+      },
+      "spreadsheets":[
+         {
+            "id":"{$period}_totals",
+            "type":"static",
+            "title":"{$period}-totals",
+            "contents":[
+               {
+                  "object":"table",
+                  "type":"rowgrouped",
+                  "title":{
+                     "accessor":"fn",
+                     "function":"return $this->get_table_title($aggregation,$start_date,$end_date);"
+                  },
+                  "datasource":"processed_data",
+                  "totals":true,
+                  "styles":{
+                     "title":{
+                        "font":{
+                           "color":"white"
+                        },
+                        "fill":"black",
+                        "height":30
+                     },
+                     "heading":{
+                        "alignment":{
+                           "horizontal":"center",
+                           "wrap":true,
+                           "vertical":"top"
+                        },
+                        "borders":{
+                           "outline":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        },
+                        "font":{
+                           "bold":true
+                        }
+                     },
+                     "table":{
+                        "borders":{
+                           "outline":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        }
+                     },
+                     "data":{
+                        "alignment":{
+                           "vertical":"top",
+                           "indent":1
+                        },
+                        "borders":{
+                           "left":{
+                              "style":"thin",
+                              "color":"#000000"
+                           },
+                           "right":{
+                              "style":"thin",
+                              "color":"#000000"
+                           }
+                        }
+                     },
+                     "data(integer)":{
+                        "alignment":{
+                           "horizontal":"center",
+                           "indent":0
+                        }
+                     },
+                     "data(lvl_0_start)":{
+                        "borders":{
+                           "top":{
+                              "style":"thin",
+                              "color":"#333333"
+                           }
+                        }
+                     },
+                     "data(lvl_0_end)":{
+                        "borders":{
+                           "bottom":{
+                              "style":"thin",
+                              "color":"#333333"
+                           }
+                        }
+                     },
+                     "data(lvl_1_start)":{
+                        "borders":{
+                           "top":{
+                              "style":"thin",
+                              "color":"#888888"
+                           }
+                        }
+                     },
+                     "data(lvl_1_end)":{
+                        "borders":{
+                           "bottom":{
+                              "style":"thin",
+                              "color":"#888888"
+                           }
+                        }
+                     }
+                  },
+                  "groups":{
+                     "accessor":"fn",
+                     "function":"return $data_grouping;"
+                  },
+                  "column_order":{
+                     "accessor":"fn",
+                     "function":"return array_merge(array_keys($data_grouping),array('form_fills','decisions','visits'));"
+                  },
+                  "columns":{
+                     "period":{
+                        "getters":{
+                           "header":{
+                              "accessor":"fn",
+                              "function":"return ucfirst(strtolower($period));"
+                           },
+                           "value":{
+                              "accessor":"row",
+                              "key":"{$period}",
+                              "type":"string"
+                           }
+                        }
+                     },
+                     "website":{
+                        "header":"Website",
+                        "subcolumns":{
+                           "website_id":{
+                              "header":"ID",
+                              "getters":{
+                                 "value":{
+                                    "accessor":"row",
+                                    "key":"website_id",
+                                    "type":"integer"
+                                 }
+                              }
+                           },
+                           "website_name":{
+                              "header":"Name",
+                              "getters":{
+                                 "value":{
+                                    "accessor":"fn",
+                                    "function":"return $this->report->website_names[$row['website_id']];",
+                                    "type":"string"
+                                 }
+                              }
+                           }
+                        }
+                     },
+                     "outreach":{
+                        "header":"Outreach",
+                        "getters":{
+                           "value":{
+                              "accessor":"row",
+                              "key":"profession",
+                              "type":"string"
+                           }
+                        }
+                     },
+                     "form_fills":{
+                        "header":"Form-Fills",
+                        "subcolumns":{
+                           "first_time":{
+                              "header":"First Time",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"first_time",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "renewal":{
+                              "header":"Renewal",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"renewal",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "question":{
+                              "header":"Question",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"question",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "other":{
+                              "header":"Other",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"other",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           },
+                           "total":{
+                              "header":"Total",
+                              "value":{
+                                 "accessor":"row",
+                                 "key":"form_fills",
+                                 "type":"integer",
+                                 "format":"commafy"
+                              }
+                           }
+                        }
+                     },
+                     "decisions":{
+                        "header":"Decisions",
+                        "getters":{
+                           "value":{
+                              "accessor":"row",
+                              "key":"decisions",
+                              "type":"integer",
+                              "format":"commafy"
+                           }
+                        }
+                     },
+                     "visits":{
+                        "header":"Visitors",
+                        "getters":{
+                           "value":{
+                              "accessor":"row",
+                              "key":"visits",
+                              "type":"integer",
+                              "format":"commafy"
+                           }
+                        }
+                     }
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}

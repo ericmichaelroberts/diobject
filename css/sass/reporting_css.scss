@@ -1,0 +1,391 @@
+//
+/*
+Document   : reporting_css
+Created on : June 8, 2016
+Author     : Eric Roberts
+*/
+
+@import '../../../../../../../../public/global_assets/stylesheets/sass/module';
+@import '../../../../../../../../public/global_assets/stylesheets/sass/dynaform/fluid';
+@import '../../../../../../../../public/global_assets/stylesheets/sass/dynaform/liquid';
+
+$ibutton-height:		26px;
+
+
+@keyframes pulse-blink {
+    0% {
+        opacity: 1
+    }
+    50% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+#reporting-wrapper {
+
+	li.select2-results__message { display: none !important; }
+
+	div.dataTables_wrapper {
+		overflow: scroll;
+	}
+
+
+	table.dataTable {
+
+		thead tr th {
+			line-height: 1.5 !important;
+			padding-top: 4px;
+			padding-bottom: 4px;
+		}
+
+		tfoot td {
+			font-weight: 600;
+			color: #666666;
+		}
+
+		tbody tr td.divider-row {
+			font-weight: 600;
+			text-decoration: underline;
+		}
+	}
+
+	div.report-selector-wrapper {
+		align-items: flex-start;
+
+	}
+}
+
+#datasource-form {
+
+	a.accordion-toggle {
+		display: flex;
+		justify-content: flex-start;
+
+		span { display: inline-block; }
+
+		.proper-title {
+			opacity: 0;
+			order: 2;
+
+			+ .default-title {
+				opacity: 1;
+				order: 1;
+			}
+		}
+	}
+
+	&.collapsed {
+		a.accordion-toggle {
+			.proper-title {
+				opacity: 1;
+				order: 1;
+
+				+ .default-title {
+					opacity: 0;
+					order: 2;
+				}
+			}
+		}
+	}
+
+}
+
+#report-selector-pane {
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+	order: 2;
+	@include breakpoint($tablet){
+		order: 1;
+	}
+
+	div.checking-indicator {
+		opacity: 0;
+		justify-content: center;
+		align-items: center;
+		flex: 1 0 auto;
+		padding: 10px 0;
+		&.active {
+			animation: pulse-blink normal 0.75s infinite ease-in-out both;
+		}
+	}
+}
+
+#report-info-pane {
+
+	order: 1;
+
+	@include breakpoint($tablet){
+		order: 2;
+		padding-left: 20px;
+	}
+
+	.report-title {
+		text-align: center;
+		@include breakpoint($tablet){
+			text-align: left;
+		}
+		font-size: 32px;
+		line-height: 30px;
+	}
+
+	.report-description {
+
+		ul {
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			position: relative;
+			padding-left: 75px;
+
+			&:not(:empty)::before {
+				content: attr(data-label) ": ";
+				position: absolute;
+				top: 0;
+				left: 0;
+				text-transform: uppercase;
+			}
+
+			li {
+				margin-right: 10px;
+				&.badge {
+					font-size: 12px;
+					height: 16px;
+					margin-bottom: 8px;
+					padding: 0 6px;
+				}
+			}
+		}
+
+		[data-label]:not(:empty)::before {
+
+		}
+	}
+
+	.report-heading {
+		opacity: 0.7;
+		font-size: 14px;
+		font-weight: normal;
+		margin-bottom: 20px;
+		border-bottom: solid rgb(200,200,200) 1px;
+
+		text-align: center;
+		@include breakpoint($tablet){
+			text-align: left;
+		}
+
+		&:empty { display: none; }
+	}
+
+	.report-keywords {
+		&:empty { display: none; }
+	}
+
+	.report-metrics {
+		&:empty { display: none; }
+	}
+
+	.report-requires {
+		list-style-position: inside;
+		list-style-type: none;
+		position: relative;
+
+		&:not(:empty)::before {
+			content: "Requires:";
+			position: absolute;
+			top: 0;
+			left: 0;
+			text-transform: uppercase;
+		}
+
+		li {
+			padding-left: 75px;
+			color: rgb(128,128,128);
+
+			&::before {
+				font-family: FontAwesome;
+				color: rgb(128,128,128);
+				font-size: 16px;
+				content: "\f096";
+				margin-right: 5px;
+			}
+
+			&.check-passed {
+				&::before {
+					content: "\f046";
+				}
+			}
+
+			&.check-failed {
+				&::before {
+					content: "\f06a";
+				}
+			}
+		}
+	}
+}
+
+#workbook-tabs {
+
+	ul.nav-tabs {
+
+		li {
+			transition: all 0.5s ease-in-out;
+			&.dropping {
+				margin-right: -10%;
+				opacity: 0;
+			}
+		}
+
+		a {
+			button.close {
+				width: 20px;
+				height: 20px;
+				font-size: 14px;
+				font-weight: 600;
+				color: rgba(0,0,0,0.5);
+				box-shadow: 0 0 3px -1px rgba(0,0,0,0.5);
+				transition: all 0.2s ease-in-out;
+				background-color: white;
+				border-radius: 50%;
+				opacity: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: -10px;
+				right: -10px;
+			}
+
+			&:hover button.close {
+				transition: all 0.2s ease-in-out;
+				opacity: 1;
+			}
+		}
+
+	}
+
+}
+
+#workbook-content {
+
+	.tab-pane {
+		transition: all 0.5s linear;
+		&.dropping {
+			opacity: 0;
+			overflow: hidden;
+			> div {
+				transform: translateX(1000px);
+				&:nth-child(1n+0){
+					transform: translateX(-1000px);
+				}
+			}
+		}
+	}
+
+	.entity-wrapper {
+
+		transition: all 1s ease-in-out;
+		position: relative;
+
+		&.box { border-top-style: none; }
+
+		> button.close {
+			width: 20px;
+			height: 20px;
+			font-size: 14px;
+			font-weight: 600;
+			color: rgba(0,0,0,0.5);
+			transition: all 0.2s ease-in-out;
+			border-radius: 50%;
+			opacity: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			top: 5px;
+			right: 5px;
+
+			&:hover {
+				box-shadow: 0 0 3px -1px rgba(0,0,0,0.5);
+			}
+		}
+
+	}
+
+}
+
+
+#datasource-options {
+
+	button.btn.start-over-btn {
+		overflow: hidden;
+		opacity: 1;
+		margin-left: 3px;
+		max-width: 150px;
+		transition: all 0.25s ease-in-out;
+	}
+
+	&.collapsed {
+		button.btn.start-over-btn {
+			border: none;
+			max-width: 0;
+			padding: 0;
+			opacity: 0;
+		}
+	}
+}
+
+
+#edit-type-pane {
+
+	#edit-type-form {
+
+		button {
+			display: block;
+			width: 100%;
+			@include breakpoint($tablet){
+				width: auto;
+				flex: 0 0 50%;
+			}
+		}
+	}
+}
+
+form > .box-header {
+
+	display: flex;
+	flex-direction: row;
+
+	.status-wrapper {
+		display: flex;
+		flex-direction: row-reverse;
+		flex: auto;
+		float: right;
+		text-align: right;
+		padding-right: 20px;
+
+		i {
+			opacity: 0;
+			transition: all 0.5s ease-in-out;
+		}
+
+		span {
+			margin-left: 5px;
+			white-space: nowrap;
+			transition: all 0.5s ease-in-out;
+
+			&:empty { opacity: 0; }
+
+			&:not(:empty) + i { opacity: 1; }
+		}
+
+		// &.active {
+		// 	opacity: 1;
+		// }
+	}
+}

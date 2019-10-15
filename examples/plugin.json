@@ -1,0 +1,10 @@
+{
+	"name":				"reporting",
+	"author":			"Eric M. Roberts",
+	"email":			"eroberts@bgea.org",
+	"organization":		"Billy Graham Evangelistic Association",
+	"description":		"Create, Save and Export pre-defined reports as Excel spreadhsheets",
+	"profile":			"2",
+	"version":			"1.0",
+	"compatibility":	"4.1"
+}
